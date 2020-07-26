@@ -19,7 +19,10 @@ description: "秋の収穫は平日の蓄積に依存します"
         </div>
     </a>
     <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} | created on {{ post.date | date: "%B %-d, %Y" }} 
+        {% if post.update_date %}
+        | updated on {{ post.update_date | update_date: "%B %-d, %Y" }}
+        {% endif %}
     </p>
 </div>
 <hr>
