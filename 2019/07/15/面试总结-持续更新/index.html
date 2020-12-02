@@ -10,7 +10,7 @@
     <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
     <meta name="theme-color" content="#000000">
     
-    <title>冬のBlog - 炮饭的博客 | PF Blog</title>
+    <title>面试总结（持续更新） - 炮饭的博客 | PF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://pfan8.github.io/">
+    <link rel="canonical" href="http://pfan8.github.io/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -164,738 +164,440 @@
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/bg-winter.jpeg')">
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2015.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>冬のBlog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">冬が访れて 春がまだ远いですか</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#面试" title="面试">面试</a>
+                        
+                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
+                        
+                        <a class="tag" href="/tags/#工作" title="工作">工作</a>
+                        
+                    </div>
+                    <h1>面试总结（持续更新）</h1>
+                    
+                    
+                    <h2 class="subheading">沈瑞医疗</h2>
+                    
+                    <span class="meta">Posted by pfan8 on July 15, 2019</span>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h2 id="沈睿医疗">沈睿医疗</h2>
+<h3 id="结果">结果</h3>
+<p>初面过，叫我终面，我拒绝了，因为想去深圳，然而公司在北京</p>
+
+<h3 id="过程">过程</h3>
+<p>2019年7月15日面的沈瑞医疗，之前投递了很多公司的提前批内推，目前没反应T T，很担心是不是简历关都过不了。唯一能面试的沈瑞医疗还是靠的熟人内推……然后后面我才知道，原来他们公司是招实习生，不是校招提前批！不过应该是有机会转正的</p>
+
+<p>首先了解过该公司，主要做智能医疗，那肯定是CV啊，然而我想面的是NLP……，去之前有跟HR说过，他说公司有招NLP的，后来面试跟面试官聊，才知道公司在病历信息提取和知识问答库会用一些NLP技术，不过鉴于第一印象，我也不是很感兴趣，毕竟医疗的话肯定还是CV为主</p>
+
+<p>面试官先看了我简历，随便问了下之前做过的项目，叫我自己叙述，当我说到用seq2seq，attention等方法时，他还点头，感觉是比较满意。也没有深入问，感觉他也不是很懂这方面。</p>
+
+<p>主要是考察算法数据结构，出了这么一个题：</p>
+
+<p><code class="language-plaintext highlighter-rouge">如果有一个持续的IP流输入，要返回出现次数最多的k个IP，假设内存无限大</code></p>
+
+<p>我答得不太好，手撕Python代码后面发现想错了，我说可以重新写不，他说不用，说一下思想就行。然后感觉后面说的不太好，他好像不太满意，我以为说错了，结果回去路上查了发现我的思路其实是对的（捂脸），应该是答得时候很没信心，没底气吧，给人感觉不厉害，另外一开始我没考虑出现次数的问题，想直接用<strong>最小堆</strong>而不用<strong>哈希表</strong>，实际上两个都要用。</p>
+
+<p>他接着问我最小堆的数据结构，我答了二叉树，根节点最小，他又问二叉树就行了？实际上还要满足所有子树都是最小堆，我一开始没说到，后面在他的提醒下想到了，不过我有一点说错了，我说<code class="language-plaintext highlighter-rouge">最小堆实现的数据结构是二叉平衡树/二叉搜索树</code>，具体说的BST还是AVL我忘了，实际上都不是，只是二叉树而已（捂脸）</p>
+
+<h3 id="总结">总结：</h3>
+<ol>
+  <li>实际上这次面试难度不大，所以水平还差，数据结构细节要继续加强</li>
+  <li>还是题做得少，而且第一次面试，没信心，不论对错，应该更自信、沉着冷静面对，让面试官感受到自己的气场！</li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="排序算法总结">
+                        Previous<br>
+                        <span>排序算法总结</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="算法策略总结">
+                        Next<br>
+                        <span>算法策略总结</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<!-- description: "秋の収穫は平日の蓄積に依存します" -->
-
-
-<div class="post-preview">
-    <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            排序算法总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            经典排序算法时间、空间复杂度、思想、实现等
-        </h3>
-        
-        <div class="post-content-preview">
-            一、时间复杂度总结
-
-
-1.1 排序算法划分
-
-排序算法的划分可以从几个不同的维度进行划分
-
-时间复杂度
-
-
-  平方阶 \(O(n^2)\)： 各类简单排序：直接插入、直接选择和冒泡排序。
-  线性对数阶 \(O(nlog(n^2))\)： 快速排序、堆排序、希尔排序和归并排序
-  线性阶 \(O(n)\)： 基数排序，此外还有桶、箱排序。
-
-
-空间维度
-
-如果要分析排序算法占用多少内存，...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on July 9, 2019 
-        
-        | updated on November 21, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/">
-        <h2 class="post-title">
-            NodeJS原理及大规模部署
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结4
-        </h3>
-        
-        <div class="post-content-preview">
-            Node作为中间层
-
-Node现在大部分都是做中间层
-
-
-  
-    
-      Web
-      Node
-      Java
-    
-  
-
-
-​          ==&gt;        ==&gt;
-
-可以做到以下几点，逐步进阶:
-
-
-  做路由，例如vue+node，也没有跨域问题
-  要SEO，可以做MPA，用Node+swig模板，甚至可以做DB
-  做SPA和M...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on November 17, 2020 
-        
-        | updated on November 17, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/11/15/I-Don't-Know-About-JS/">
-        <h2 class="post-title">
-            I Don't Know About JS
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结3
-        </h3>
-        
-        <div class="post-content-preview">
-            I don’t know about JS
-
-一、Additive &amp; Unary
-
-js中+,-,~都会把对象（甚至function）转换为表达式
-
-例如
-
-+function(){} // NaN
--function(){} // NaN
-~function(){} // -1
-+[] // 0
--[] // 0
-~[] // -1
-+{} // NaN
--{} // NaN
-~...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on November 15, 2020 
-        
-        | updated on November 15, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/">
-        <h2 class="post-title">
-            函数式编程与JS
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结2
-        </h3>
-        
-        <div class="post-content-preview">
-            函数式编程 （Functional Programming）
-
-一、函数式编程思维
-
-1.1 前言
-
-范畴论Category Theory
-
-
-  函数式编程是范畴论的数学分支，认为世界上所有概念体系都可以抽象成一个个范畴
-  彼此之间存在某种关系概念、事务、对象等等，都构成范畴。任何事物只要找出他们之间的关系，就能定义
-  箭头表示范畴成员之间的关系，正式的名称叫做”态射“（morphis...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 25, 2020 
-        
-        | updated on October 25, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/20/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            JavaScript基础知识点总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结
-        </h3>
-        
-        <div class="post-content-preview">
-            1.变量提升
-
-  变量提升：声明提升一层作用域，赋值则保留在词法环境中
-  函数提升：
-    
-      函数提升类似变量提升，提升一层作用域
-      但同时函数提升比变量提升强大，如果变量声明提升但是undefined，则忽略这个变量声明采用其上方的函数声明
-    
-  
-  变量提升和函数提升都只提升一层作用域，所以就害怕遇到函数，阻挡变量提升。同时函数也是通过这种机制实现私...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 20, 2020 
-        
-        | updated on October 20, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/">
-        <h2 class="post-title">
-            《夺冠》- Film reviews
-        </h2>
-        
-        <h3 class="post-subtitle">
-            观影有感
-        </h3>
-        
-        <div class="post-content-preview">
-            二刷《夺冠》，心中波涛翻涌，这部纪实的艺术给我带来许多触动，个人经历上有很多与之共鸣之处，同时也对一些问题深思过，得到以下观点：
-
-
-  体育竞技项目确实具有很强的不确定性，尤其是进入淘汰赛，电竞赛事也是小组赛发挥好的队伍通常都不是最后的冠军，尤其是大赛上。由此可见技巧是一方面，在大赛的环境下，更重要还是考验人的心态，因此有没有坚定的信念会显得格外重要。同时个人认为这也是体育类赛事的魅力之一...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 1, 2020 
-        
-        | updated on October 1, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            CSS Position & CSS3 Display 总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            css布局样式
-        </h3>
-        
-        <div class="post-content-preview">
-            CSS: position属性
-
-
-  
-    relative：该模式会影响周围的DOM，可以通过top、buttom、left、right调整offset，下图很形象
-
-    
-  
-  
-    absolute：不同于relative，absolute会锁定当前DOM在父容器的相对位置，这个父容器是最近的position为relative的DOM，会一直向上查找，直到body。同...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on July 21, 2020 
-        
-        | updated on July 26, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/07/16/git-merge-&-rebase-&-cherry-pick/">
-        <h2 class="post-title">
-            Git Work Flow
-        </h2>
-        
-        <h3 class="post-subtitle">
-            something you need to know for teamwork
-        </h3>
-        
-        <div class="post-content-preview">
-            Preface
-
-Since I come to a place where I need to speak English everyday, I wanna have a try to post this blog with English, it seems intersting and challenging, even for the future, maybe we can se...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on July 16, 2020 
-        
-        | updated on July 16, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/">
-        <h2 class="post-title">
-            Github SSH配置
-        </h2>
-        
-        <h3 class="post-subtitle">
-            安全便捷的git环境
-        </h3>
-        
-        <div class="post-content-preview">
-            背景
-
-用公司的Github账号时登录有2FC的存在，导致本地git clone时候总是登录失败无法clone代码下来，在manager的建议下，采用SSH的方式登录github，跳过2FC的步骤，也不用再设置账号密码
-
-步骤
-
-https://help.github.com/en/github/authenticating-to-github/connecting-to-github-wi...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on June 21, 2020 
-        
-        | updated on June 21, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/05/19/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            剑指offer总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            66题解法思路
-        </h3>
-        
-        <div class="post-content-preview">
-            1.【数组】二维数组中的查找
-
-题目描述
-
-在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
-
-Solution
-
-从左下角或者右上角开始查找，沿着一个方向找，因为这里二维矩阵的特性，导致一个元素的左上区域的所有元素必然比它小，同时其右下区域的所有元...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on May 19, 2020 
-        
-        | updated on May 19, 2020
-        
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page/2/index.html">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
+        				
                             
-                                <a href="/tags/#面试" title="面试" rel="2">
+                				<a href="/tags/#面试" title="面试" rel="2">
                                     面试
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
                                     Machine Learning
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#工作" title="工作" rel="2">
+                				<a href="/tags/#工作" title="工作" rel="2">
                                     工作
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#PEP" title="PEP" rel="2">
+                				<a href="/tags/#PEP" title="PEP" rel="2">
                                     PEP
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#Python" title="Python" rel="5">
+                				<a href="/tags/#Python" title="Python" rel="5">
                                     Python
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#规范" title="规范" rel="3">
+                				<a href="/tags/#规范" title="规范" rel="3">
                                     规范
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
                                     Jupyter Notebook
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#小象学院" title="小象学院" rel="1">
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
                                     小象学院
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#NLP" title="NLP" rel="2">
+                				<a href="/tags/#NLP" title="NLP" rel="2">
                                     NLP
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#模型" title="模型" rel="1">
+                				<a href="/tags/#模型" title="模型" rel="1">
                                     模型
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#SOTA" title="SOTA" rel="1">
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
                                     SOTA
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#IT" title="IT" rel="2">
+                				<a href="/tags/#IT" title="IT" rel="2">
                                     IT
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#算法" title="算法" rel="10">
+                				<a href="/tags/#算法" title="算法" rel="10">
                                     算法
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#LSTM" title="LSTM" rel="1">
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
                                     LSTM
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#深度学习" title="深度学习" rel="1">
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
                                     深度学习
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#梯度" title="梯度" rel="1">
+                				<a href="/tags/#梯度" title="梯度" rel="1">
                                     梯度
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#排序" title="排序" rel="1">
+                				<a href="/tags/#排序" title="排序" rel="1">
                                     排序
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#总结" title="总结" rel="3">
+                				<a href="/tags/#总结" title="总结" rel="3">
                                     总结
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#贪心" title="贪心" rel="1">
+                				<a href="/tags/#贪心" title="贪心" rel="1">
                                     贪心
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#动态规划" title="动态规划" rel="2">
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
                                     动态规划
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#数据结构" title="数据结构" rel="1">
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
                                     数据结构
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#堆" title="堆" rel="1">
+                				<a href="/tags/#堆" title="堆" rel="1">
                                     堆
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#栈" title="栈" rel="1">
+                				<a href="/tags/#栈" title="栈" rel="1">
                                     栈
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#背包问题" title="背包问题" rel="1">
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
                                     背包问题
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#C++" title="C++" rel="1">
+                				<a href="/tags/#C++" title="C++" rel="1">
                                     C++
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#STL" title="STL" rel="1">
+                				<a href="/tags/#STL" title="STL" rel="1">
                                     STL
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#位运算" title="位运算" rel="2">
+                				<a href="/tags/#位运算" title="位运算" rel="2">
                                     位运算
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#double pointer" title="double pointer" rel="1">
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
                                     double pointer
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
                                     快慢指针
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#链表" title="链表" rel="1">
+                				<a href="/tags/#链表" title="链表" rel="1">
                                     链表
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#cpython" title="cpython" rel="1">
+                				<a href="/tags/#cpython" title="cpython" rel="1">
                                     cpython
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
                                     字符串匹配
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#github" title="github" rel="1">
+                				<a href="/tags/#github" title="github" rel="1">
                                     github
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#ssh" title="ssh" rel="1">
+                				<a href="/tags/#ssh" title="ssh" rel="1">
                                     ssh
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#安全" title="安全" rel="1">
+                				<a href="/tags/#安全" title="安全" rel="1">
                                     安全
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#git" title="git" rel="1">
+                				<a href="/tags/#git" title="git" rel="1">
                                     git
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#css" title="css" rel="1">
+                				<a href="/tags/#css" title="css" rel="1">
                                     css
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#layout" title="layout" rel="1">
+                				<a href="/tags/#layout" title="layout" rel="1">
                                     layout
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#responsive" title="responsive" rel="1">
+                				<a href="/tags/#responsive" title="responsive" rel="1">
                                     responsive
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#life" title="life" rel="1">
+                				<a href="/tags/#life" title="life" rel="1">
                                     life
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#film" title="film" rel="1">
+                				<a href="/tags/#film" title="film" rel="1">
                                     film
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#javascript" title="javascript" rel="4">
+                				<a href="/tags/#javascript" title="javascript" rel="4">
                                     javascript
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#functional programming" title="functional programming" rel="1">
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
                                     functional programming
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#nodejs" title="nodejs" rel="1">
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
                                     nodejs
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#工具" title="工具" rel="1">
+                				<a href="/tags/#工具" title="工具" rel="1">
                                     工具
                                 </a>
                             
-                        
-                    </div>
+        				
+        			</div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-                        
-                            <a href="/about">
-                                <img src="/img/about-PF-gentle.jpg"/>
-                            </a>
-                        
-                        
-                            <p>Where is the end?</p>
-                        
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            <!-- add jianshu add target = "_blank" to <a> by BY -->
-                            
-                            <li>
-                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://www.zhihu.com/people/pfan8">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://www.facebook.com/pfan8">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://github.com/pfan8">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                        </ul>
-                        
-                            <p>✉️ fqwgc8@outlook.com</p>
-                        
-                    </div>
-                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -912,10 +614,51 @@ Solution
                     
                 </ul>
                 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
@@ -1116,6 +859,50 @@ $(document).ready(function() {
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

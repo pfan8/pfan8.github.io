@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>函数式编程与JS - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-github-cup.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-github-cup.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+                        
+                        <a class="tag" href="/tags/#functional programming" title="functional programming">functional programming</a>
+                        
+                    </div>
+                    <h1>函数式编程与JS</h1>
+                    
+                    
+                    <h2 class="subheading">老袁の相声总结2</h2>
+                    
+                    <span class="meta">Posted by pfan8 on October 25, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h1 id="函数式编程-functional-programming">函数式编程 （Functional Programming）</h1>
+
+<h2 id="一函数式编程思维">一、函数式编程思维</h2>
+
+<h3 id="11-前言">1.1 前言</h3>
+
+<p><strong>范畴论Category Theory</strong></p>
+
+<ol>
+  <li>函数式编程是范畴论的数学分支，认为世界上所有概念体系都可以抽象成一个个范畴</li>
+  <li>彼此之间存在某种关系概念、事务、对象等等，都构成范畴。任何事物只要找出他们之间的关系，就能定义</li>
+  <li>箭头表示范畴成员之间的关系，正式的名称叫做”态射“（morphism）。范畴论认为，同一个范畴的所有成员，就是不同状态的”变形“（transformation）。通过”态射“，一个成员可以”变形“成另一个成员。</li>
+</ol>
+
+<h3 id="12-基础理论">1.2 基础理论</h3>
+
+<p><strong>理论</strong></p>
+
+<p>​	知乎上的<a href="https://www.zhihu.com/question/28292740/answer/40336090">一个回答</a>很好，内容太多就不一一复制了</p>
+
+<p><strong>JS中理解</strong></p>
+
+<ol>
+  <li>数学中的函数书写如下形式\(f(x)=y\) . 一个函数F，以X作为参数，并返回输出Y。要求：
+    <ul>
+      <li>函数必须总是接受一个参数</li>
+      <li>函数必须返回一个值</li>
+      <li>函数只依赖于参数（X）而不是外部环境运行、对于给定的X只会输出唯一的Y</li>
+    </ul>
+  </li>
+  <li>函数式编程不是用函数来编程，也不是传统的面向过程编程。主旨在于将复杂的函数转换成简单的函数（计算理论，或者递归论，或者\(\lambda\)演算）。运算过程尽量写成一系列嵌套的函数调用</li>
+  <li>通俗写法 function xx(){}区别开函数和方法。方法要与指定的对象绑定、函数可以直接调用</li>
+  <li>JS是披着C外衣的Lisp （OO是用function的prototype来实现的）</li>
+  <li>真正的火热是随着React的高阶函数而逐步升温</li>
+</ol>
+
+<p><strong>FP特征</strong></p>
+
+<ul>
+  <li>函数式”第一等公民“，可以赋值给其他变量，也可以作为参数传入其他函数，或者作为别的函数的返回值</li>
+  <li>只用”表达式“，不用”语句“</li>
+  <li>没有”副作用“</li>
+  <li>不修改状态</li>
+  <li>引用透明（函数运行只靠参数且相同的输入总是获得相同的输出）</li>
+</ul>
+
+<h2 id="二函数式编程常用核心概念">二、函数式编程常用核心概念</h2>
+
+<h3 id="21-纯函数">2.1 纯函数</h3>
+
+<p><strong>纯函数特征</strong></p>
+
+<ul>
+  <li>对于相同的输入，永远得到相同的输出</li>
+  <li>没有任何可观察的副作用，也不依赖于外部环境的状态</li>
+</ul>
+
+<p>例如<code class="language-plaintext highlighter-rouge">Array.slice</code>是纯函数，而<code class="language-plaintext highlighter-rouge">Array.splice</code>不是</p>
+
+<p><strong>优缺点</strong></p>
+
+<p>优点：降低系统复杂度，并因为输出是可预测的，因此能做缓存，以lodash为例</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">sin</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+
+<span class="c1">// First time can be slower</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// with session, it can run faster</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>缺点：可能造成hard code，拓展性比较差</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// not a Pure Function</span>
+<span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">checkage</span> <span class="o">=</span> <span class="nx">age</span> <span class="o">=&gt;</span> <span class="nx">age</span> <span class="o">&gt;</span> <span class="nx">min</span><span class="p">;</span>
+
+<span class="c1">// Pure Function</span>
+<span class="kd">var</span> <span class="nx">checkage</span> <span class="o">=</span> <span class="nx">age</span> <span class="o">=&gt;</span> <span class="nx">age</span> <span class="o">&gt;</span> <span class="mi">18</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>对于缺点，可以考虑用柯里化（curried function）</p>
+
+<h3 id="22-纯度和幂等性">2.2 纯度和幂等性</h3>
+
+<p><strong>幂等性</strong>是指执行无数次后还具有相同的效果，同样的参数运行一次函数应该与连续两次结果一致。<strong>幂等性</strong>在函数式编程中与纯度相关，但又不一致。</p>
+
+<p>例如
+\(Math.abs(Math.abs(-42))\)</p>
+
+<h3 id="23-偏应用partial-application函数">2.3 偏应用（partial application）函数</h3>
+
+<p><strong>定义</strong></p>
+
+<ul>
+  <li>传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数</li>
+  <li>偏函数之所以”偏“，就在于其职能处理那些能与至少一个case语句匹配的输入，而不能处理所有</li>
+</ul>
+
+<p><strong>实现</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">partial</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(...</span><span class="nx">moreArgs</span><span class="p">)</span> <span class="o">=&gt;</span> 
+<span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">,</span> <span class="p">...</span><span class="nx">moreArgs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>使用</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span>
+<span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nx">partial</span><span class="p">(</span><span class="nx">add</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nx">add5</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">// output: 9</span>
+</code></pre></div></div>
+
+<p>其实bind也是一种FAP</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nx">add</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="24-柯里化">2.4 柯里化</h3>
+
+<p><strong>柯里化（Curried）</strong>通过PAF实现，它是把一个多参数函数转换为一个嵌套一元函数的过程。传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的函数</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">curry</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="o">=</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="p">(...</span><span class="nx">moreArgs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">arg</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">arg</span><span class="p">)</span> <span class="p">:</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)))([...</span><span class="nx">args</span><span class="p">,</span> <span class="p">...</span><span class="nx">moreArgs</span><span class="p">])</span>
+
+<span class="kd">let</span> <span class="nx">curryTest</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">d</span><span class="p">);</span>
+<span class="nx">curryTest</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 10</span>
+<span class="nx">curryTest</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 10</span>
+<span class="nx">curryTest</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<p>有柯里化就有<strong>反柯里化</strong>，柯里化是固定部分参数，创建针对性更强的函数，而反柯里化则相反，为了扩大适用范围，使本来只有特定对象才适用的方法，拓展到更多的对象</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">uncurring</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">shift</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// 假设上例中的curryTest已存在</span>
+<span class="kd">var</span> <span class="nx">ucTest</span> <span class="o">=</span> <span class="nx">curryTest</span><span class="p">.</span><span class="nx">uncurring</span><span class="p">();</span>
+<span class="nx">ucTest</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 10</span>
+
+<span class="kd">var</span> <span class="nx">push</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">uncurring</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">push</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [1,2,3,4,5]</span>
+</code></pre></div></div>
+
+<p><strong>柯里化是一种”预加载“函数的方法，也可以当做对参数的缓存，是一种非常高效的编写函数的方法</strong></p>
+
+<h4 id="柯里化-vs-偏应用">柯里化 VS 偏应用</h4>
+
+<p>柯里化的参数列表是从左向右的，如果使用setTimeout类似的函数就得做额外的封装</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// curry vs PAF</span>
+<span class="c1">// 对于setTimeout需要将timeout和fn反置的函数，就不适合采用从左向右的curry，而适合使用偏函数PAF</span>
+<span class="kd">const</span> <span class="nx">delayMS</span> <span class="o">=</span> <span class="p">(</span><span class="nx">timeout</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">setTimeoutWrapper</span> <span class="o">=</span> <span class="p">(</span><span class="nx">timeout</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">delayTenMS</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">setTimeoutWrapper</span><span class="p">)(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nx">delayTenMS</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">code guy</span><span class="dl">'</span><span class="p">)});</span>
+</code></pre></div></div>
+
+<p>需要setTimeoutWrapper，显得臃肿，如果用PAF则会比较简洁</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">partial</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(...</span><span class="nx">moreArgs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">moreArgs</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">delayTenMS</span> <span class="o">=</span> <span class="nx">partial</span><span class="p">(</span><span class="nx">setTimeout</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="nx">delayTenMS</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">code guy</span><span class="dl">'</span><span class="p">)});</span>
+</code></pre></div></div>
+
+<h3 id="25-函数组合">2.5 函数组合</h3>
+
+<p>compose处理洋葱代码<code class="language-plaintext highlighter-rouge">h(g(f(x)))</code>，</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compose(f, compose(g,h))
+compose(compose(f,g),h)
+compose(f,g,h)
+</code></pre></div></div>
+
+<p>compose只能组合接受一个参数的函数，类似于filter、map（投影函数：总是在应用转换操作，通过传入高阶参数后返回数组），不能被直接组合的可以借助偏函数包裹后继续组合。</p>
+
+<p>我们需要<strong>函数组合子</strong>交换compose的执行方向，使得compose类似于管道pipe，组合子可以组合其他函数（或其他组合子），并作为逻辑控制单元的高阶函数，组合子通常不声明任何变量，也不包含任何业务逻辑，他们旨在管理函数程序执行流程，并在链式调用中对中间结果进行操作</p>
+
+<p>常见组合子：</p>
+
+<ul>
+  <li>辅助组合子: nothing, identity, defaultTo, always</li>
+  <li>函数组合子: gather, spread, reverse, partial, partialRight, curry, tap, alt, tryCatch, seq, converge, map, useWith, reduce, compose</li>
+  <li>谓语组合子: filter, group, sort</li>
+  <li>其他: juxt</li>
+</ul>
+
+<p>上述均属于SKI组合子</p>
+
+<h3 id="26-point-free">2.6 Point Free</h3>
+
+<p>Point Free即把一些对象自带的方法转化为纯函数</p>
+
+<p>例如下面这个函数</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>写成point free则拆分为，从而使得split和toUpperCase不局限于str的调用</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">toUpperCase</span> <span class="o">=</span> <span class="nx">word</span> <span class="o">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">split</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+
+<span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">),</span> <span class="nx">toUpperCase</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="dl">"</span><span class="s2">abcd efgh</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>这种风格能够帮助我们减少不必要的命名，让代码保持简洁和通用</p>
+
+<h3 id="27-惰性链惰性求值惰性函数">2.7 惰性链、惰性求值、惰性函数</h3>
+
+<p>lazyChain即，一个链式调用上，到最后一个函数上才执行操作</p>
+
+<p>当输入很大但只有一个小的子集有效时，避免不必要的函数调用就是所谓的惰性求值</p>
+
+<p>惰性求值、多形函数和惰性链相似，只是赋值过程中可能有很多判断，而一旦达到某个分支，就可以把函数同名替换，从而避免之后执行该函数还要走很多不必要的判断</p>
+
+<h2 id="三更加专业术语">三、更加专业术语</h2>
+
+<h3 id="31-高阶函数hoc">3.1 高阶函数HOC</h3>
+
+<p>函数当参数，返回一个封装的函数，达到更高程度的抽象</p>
+
+<h3 id="32-尾调用优化ptc">3.2 尾调用优化PTC</h3>
+
+<ul>
+  <li>
+    <p>return相同函数，即尾递归调用（Tail Call）</p>
+  </li>
+  <li>
+    <p>使得尾递归调用不开启新的函数栈，只return function，称为尾递归优化（Proper Tail Call）</p>
+  </li>
+  <li>
+    <p>浏览器到现在没有实现PTC，V8官方解释主要有2点原因：</p>
+
+    <ul>
+      <li>PTC隐式优化，并不知道是否是开发者所想要的行为</li>
+      <li>PTC隐藏了函数调用stack，难以debug</li>
+    </ul>
+
+    <p>如果要强制开启PTC，有以下3种方法（STC）：</p>
+
+    <ol>
+      <li>return continue fn;</li>
+      <li>!return fn;</li>
+      <li>#function</li>
+    </ol>
+  </li>
+  <li>
+    <p>也可以使用蹦床函数（trampoline）解决尾递归为题，思想是转换为while循环</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">trampoline</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="nx">f</span> <span class="o">&amp;&amp;</span> <span class="nx">f</span> <span class="k">instanceof</span> <span class="nb">Function</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">f</span> <span class="o">=</span> <span class="nx">f</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">f</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="33-闭包">3.3 闭包</h3>
+
+<p>闭包会造成内存泄露，外层的函数执行完毕后，栈上的调用帧被释放，但是堆上的作用域并不释放。需要用weekmap</p>
+
+<h3 id="34-容器functor">3.4 容器、Functor</h3>
+
+<p>我们可以把”范畴“想象成是一个容器，里面包含两样东西。值（value）、值的变形关系，也就是函数。</p>
+
+<p>范畴论使用函数表达范畴之间的关系。</p>
+
+<p>伴随着范畴论的发展，就发展处一整套函数的运算方法。这套方法起初只用于数学运算，后来有人将它在计算机上实现了，就编程了今天的Functional Programming。</p>
+
+<p>本质上，函数式编程只是范畴论的运算方法，跟数理逻辑、微积分、行列式是同一类东西，都是数学方法，只是碰巧它能用来写程序。</p>
+
+<p>函数不仅可以用于同一个范畴之中值的转换，还可以用于将一个范畴转换成另一个范畴。这就涉及到了函子（Functor）。</p>
+
+<p>函子是函数式编程里面最重要的数据类型，也是基本的运算单位和功能单位。它首先是一种范畴，也就是说，是一个容器，包含了值和变性关系。比较特殊的事，它的变形关系可以依次作用于每一个值，将当前容器变形成另一个容器。</p>
+
+<p>用Redux解释容器和函子，就是state为容器，action为转换function，reducer为map函数，从而Redux能够更新state容器，所以Redux就是一个函子</p>
+
+<p>常见的函子有</p>
+
+<ul>
+  <li>Pointed</li>
+  <li>Maybe</li>
+  <li>Either</li>
+  <li>AP</li>
+  <li>IO（脏）</li>
+  <li>Monad（pipe）</li>
+</ul>
+
+<p>下面以代码为例，详细介绍每一个函子</p>
+
+<h4 id="341-container">3.4.1 Container</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Container</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// FP assumes that Functor contains a function named 'of'</span>
+<span class="nx">Container</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="c1">//Container.of('abcd');</span>
+<span class="c1">// Generally, Functor is just a Container with map function, this map function will map each value in the Container into another Container</span>
+<span class="nx">Container</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">Container</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="nx">Container</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+	<span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>	<span class="c1">// return Container(4)</span>
+	<span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">Result is </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">x</span><span class="p">)</span> <span class="c1">// return Container('Result is 4')</span>
+</code></pre></div></div>
+
+<h4 id="342-functor">3.4.2 Functor</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Functor</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Functor</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">val</span><span class="p">))</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="k">new</span> <span class="nx">Functor</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// Functor(4)</span>
+</code></pre></div></div>
+
+<h4 id="343-pointed">3.4.3 Pointed</h4>
+
+<p>Pointed是Functor的子集，上述Functor生成新的函子的时候，用了new命令，仿佛是OO，因此FP一般约定，函子有一个of方法，用于生成新的Container</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Functor</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Functor</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Exp: Array.of("")</span>
+
+<span class="c1">// Functor的例子可以改为</span>
+<span class="nx">Functor</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// Functor(4)</span>
+</code></pre></div></div>
+
+<h4 id="344-maybe">3.4.4 Maybe</h4>
+
+<p>Maybe用于处理错误和异常。由于容器内部的值可能是null，undefined等空值，而外部函数未必有相应的错误处理机制，从而导致错误。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Functor</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="kc">null</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+
+<span class="kd">class</span> <span class="nx">Maybe</span> <span class="kd">extends</span> <span class="nx">Functor</span> <span class="p">{</span>
+  <span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">val</span> <span class="p">?</span> <span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">val</span><span class="p">))</span> <span class="p">:</span> <span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="kc">null</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span> <span class="c1">// Maybe(null)</span>
+</code></pre></div></div>
+
+<p>Maybe function implements way</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Maybe</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Maybe</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">Maybe</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isNothing</span><span class="p">()</span> <span class="p">?</span> <span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span> <span class="p">:</span> <span class="nx">Maybe</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="nx">Maybe</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isNothing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 原型来自Haskell</span>
+</code></pre></div></div>
+
+<h4 id="345-either">3.4.5 Either</h4>
+
+<p>Functor能做的事太少了，try/catch/throw并不是”纯“的，因为它从外部接管了我们的函数，并且在这个函数出错时抛弃了它的返回值。</p>
+
+<p>例如Promise是可以调用catch来集中处理错误的</p>
+
+<p>事实上Either并不只是用来做错误处理的，它表示了逻辑或，范畴学里的coproduc</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Either</span> <span class="kd">extends</span> <span class="nx">Functor</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">right</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">right</span><span class="p">?</span>
+      <span class="nx">Either</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">right</span><span class="p">))</span> <span class="p">:</span>
+    	<span class="nx">Either</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">left</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">right</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Either</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Either</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Example</span>
+<span class="kd">var</span> <span class="nx">addOne</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Either</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">addOne</span><span class="p">);</span> <span class="c1">// Either(5, 7);</span>
+<span class="nx">Either</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">null</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">addOne</span><span class="p">);</span> <span class="c1">// Either(2, null);</span>
+<span class="nx">Either</span><span class="p">.</span><span class="k">of</span><span class="p">({</span><span class="na">address</span><span class="p">:</span> <span class="dl">'</span><span class="s1">xxx</span><span class="dl">'</span><span class="p">},</span> <span class="nx">currentUser</span><span class="p">.</span><span class="nx">address</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">updateField</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>错误处理：如何代替try…catch呢</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Left</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">Right</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Left</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Left</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">Right</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Right</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 这里不同！</span>
+<span class="nx">Left</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Right</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">Right</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Left和Right唯一的区别就在于，Left不对容器做任何事情，只是简单的拿进来又扔出去，这个特性意味着，Left可以用来传递一个错误消息</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getAge</span> <span class="o">=</span> <span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">age</span> <span class="p">?</span> <span class="nx">Right</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span> <span class="p">:</span> <span class="nx">Left</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="dl">"</span><span class="s2">ERROR!</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">getAge</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stark</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="dl">'</span><span class="s1">21</span><span class="dl">'</span><span class="p">}.</span><span class="nx">map</span><span class="p">(</span><span class="nx">age</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">Age is </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">age</span><span class="p">));</span> <span class="c1">// Right('Age is 21')</span>
+<span class="nx">getAge</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stark</span><span class="dl">'</span><span class="p">}).</span><span class="nx">map</span><span class="p">(</span><span class="nx">age</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">Age is </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">age</span><span class="p">);</span> <span class="c1">// Left('ERROR!')</span>
+</code></pre></div></div>
+
+<p>Left可以让调用链中任意一环的错误立刻返回到调用链的尾部，这给我们错误处理带来了很大的方便，再也不用一层层的try/catch了。</p>
+
+<h4 id="346-ap">3.4.6 AP</h4>
+
+<p>函子里面包含的值，完全可能是函数。我们可以想象这样一种情况，一个函子的值是数值，另一个函子的值是函数。而AP函子就是处理这样的转换</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">AP</span> <span class="kd">extends</span> <span class="nx">Functor</span> <span class="p">{</span>
+  <span class="nx">ap</span><span class="p">(</span><span class="nx">F</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">AP</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="nx">F</span><span class="p">.</span><span class="nx">val</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">AP</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">addTwo</span><span class="p">).</span><span class="nx">ap</span><span class="p">(</span><span class="nx">Functor</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h4 id="347-io">3.4.7 IO</h4>
+
+<p>IO的__value是一个函数，它把不纯的操作（比如IO、网络请求、DOM）包裹到一个函数内，从而延迟这个操作的执行。直到最后一步执行，这样讲外部依赖放置一个地方，从而减小副作用。</p>
+
+<p>因此IO也算一个惰性求值</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">compose</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">flowRight</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">IO</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">__value</span> <span class="o">=</span> <span class="nx">f</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">IO</span><span class="p">.</span><span class="k">of</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">IO</span><span class="p">(</span><span class="nx">_</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">);</span>
+
+<span class="nx">IO</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">IO</span><span class="p">(</span><span class="nx">compose</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">))</span>
+<span class="p">};</span>
+
+<span class="kd">class</span> <span class="nx">IO</span> <span class="kd">extends</span> <span class="nx">Monad</span> <span class="p">{</span>
+  <span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">IO</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">compose</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">__value</span><span class="p">))</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">readFile</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">IO</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf-8</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">readFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">./user.txt</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">tail</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">print</span><span class="p">)</span>
+<span class="c1">//等同于</span>
+<span class="nx">readFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">./user.txt</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">tail</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">china</span><span class="p">(</span><span class="nx">print</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="348-monad">3.4.8 Monad</h4>
+
+<p>Monad简单来说就是对函子的拆箱装箱，它有一个flatMap方法，与map方法作用相同，唯一的区别是如果生成了一个嵌套函子，它会取出后者内部的值，保证返回的永远是一个单层的容器，不会出现嵌套的情况。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Monad</span> <span class="kd">extends</span> <span class="nx">Functor</span> <span class="p">{</span>
+  <span class="nx">join</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">val</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">flatMap</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">).</span><span class="nx">join</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果函数f返回的是一个函子，那么this.map(f)就会生成一个嵌套的函子。所以，join方法保证了flatMap方法总是返回一个单层的函子。这意味着嵌套的函子会被铺平（flatten）</p>
+
+<h2 id="四流行的几大函数式编程库">四、流行的几大函数式编程库</h2>
+
+<ul>
+  <li>
+    <p>RxJS：实现函数响应式编程（Functional Reactive Programming，FRP），Observer，流式处理，被各大浏览器引擎引入实现，因此反而没有用武之地。RxJS从函数式编程范式中借鉴了很多东西，比如链式函数调用；惰性求值等等</p>
+  </li>
+  <li>
+    <p>cycleJS：基于RxJS，它是一个彻彻底底的FRP理念的框架，和React一样支持virtual DOM、JSX语法，但现在似乎没看到大型的应用经验</p>
+  </li>
+  <li>
+    <p>underscoreJS：underscore是一个js工具库，它提供了一整套函数式编程的实用功能，但是没有拓展任何js内置对象。它解决了这个问题：”如果我面对一个空白的HTML页面，并希望立即开始工作，我需要什么？“它弥补了jQuery没有实现的功能，同时又是Backbone必不可少的部分。Underscore提供了100多个函数，包括常用的：map、filter、invoke…当然还有更多专业的辅助函数，如：函数绑定、js模板功能、创建快速索引、强类型相等测试等等。</p>
+  </li>
+  <li>
+    <p>lodashJS、lazy（惰性求值）：lodash是一个具有一致接口、模块化、高性能等特性的js工具库，是underscore的fork，其最初目标也是”一致的跨浏览器行为，并改善性能“。lodash采用延迟计算，这意味着lodash可以进行shortcut、fusion这样的优化，通过合并链式大大降低迭代的次数，从而大大提升其执行性能</p>
+  </li>
+  <li>
+    <p>ramdajs：ramda是一个非常优秀的js工具库，跟同类比更函数式，主要体现在以下几个原则</p>
+
+    <ul>
+      <li>Ramda的数据一律放在最后一个参数，理念是”function first，data last“</li>
+      <li>ramda里面提供的函数全部都是curry的，也就是说，所有多参数的函数，默认都可以单参数使用</li>
+      <li>ramda推崇point free</li>
+      <li>ramda有个非常好用的参数占位符R._大大减轻了函数在pointfree过程中参数位置的问题</li>
+    </ul>
+
+    <p>因此相比underscore/lodash，ramda要干净很多</p>
+  </li>
+</ul>
+
+<h2 id="五实际应用场景">五、实际应用场景</h2>
+
+<h3 id="51-易调试热部署并发">5.1 易调试、热部署、并发</h3>
+
+<ol>
+  <li>函数式编程中的每个符号都是const的，于是没有什么函数会有副作用。谁也不能再运行时修改任何东西，也没有函数可以修改在它的作用域之外的什么值给其他函数使用。因此非常干净。</li>
+  <li>函数式编程不需要考虑”死锁“（dead lock），因为它不修改变量，不存在锁线程的问题，不必担心一个线程的数据，被另一个线程修改，所以可以放心将工作分摊到多个线程，部署”并发编程“（concurrency）</li>
+  <li>函数式编程中所有状态就是传给函数的参数，而参数都是存储在栈上的，这一特性让软件的热部署变得十分简单。只要比较一下正在运行的代码以及新的代码获得一个diff，然后用这个diff更新现有的代码，新代码的热部署就完成了。</li>
+</ol>
+
+<h3 id="52-单元测试">5.2 单元测试</h3>
+
+<p>严格的函数式编程，由于固定的输入会得到固定的输出，因此是单元测试者的梦中仙境（wet dream），不用考虑函数的调用顺序，不必谨慎的设置外部状态。</p>
+
+<h3 id="53-总结">5.3 总结</h3>
+
+<p>函数式编程不是万能的，相反，它应当被视为我们现有工具箱的一个很自然的补充——它带来了更高的可组合型，灵活性以及容错性。现代的JS库已经开始尝试拥抱函数式编程的概念以及获取这些优势。Redux作为一种FLUX的变种实现，核心理念也是状态机和函数式编程。</p>
+
+<p>Software Engineering说没有银弹，因此需要选择场景使用。很多实际应用中是很难用函数式去表达的，选择OOP亦或是其他编程范式或许会更简单。但使用函数式编程也能有效降低系统复杂度，提高系统可读性、可维护性和开发测试效率。</p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/10/20/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="JavaScript基础知识点总结">
+                        Previous<br>
+                        <span>JavaScript基础知识点总结</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/11/15/I-Don't-Know-About-JS/" data-toggle="tooltip" data-placement="top" title="I Don't Know About JS">
+                        Next<br>
+                        <span>I Don't Know About JS</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#面试" title="面试" rel="2">
+                                    面试
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                                    Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工作" title="工作" rel="2">
+                                    工作
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PEP" title="PEP" rel="2">
+                                    PEP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="5">
+                                    Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#规范" title="规范" rel="3">
+                                    规范
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                                    Jupyter Notebook
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
+                                    小象学院
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#NLP" title="NLP" rel="2">
+                                    NLP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#模型" title="模型" rel="1">
+                                    模型
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
+                                    SOTA
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#算法" title="算法" rel="10">
+                                    算法
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
+                                    LSTM
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
+                                    深度学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#梯度" title="梯度" rel="1">
+                                    梯度
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#排序" title="排序" rel="1">
+                                    排序
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#总结" title="总结" rel="3">
+                                    总结
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#贪心" title="贪心" rel="1">
+                                    贪心
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
+                                    动态规划
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
+                                    数据结构
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#堆" title="堆" rel="1">
+                                    堆
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#栈" title="栈" rel="1">
+                                    栈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
+                                    背包问题
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#C++" title="C++" rel="1">
+                                    C++
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#STL" title="STL" rel="1">
+                                    STL
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#位运算" title="位运算" rel="2">
+                                    位运算
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
+                                    double pointer
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                                    快慢指针
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#链表" title="链表" rel="1">
+                                    链表
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#cpython" title="cpython" rel="1">
+                                    cpython
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                                    字符串匹配
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#github" title="github" rel="1">
+                                    github
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ssh" title="ssh" rel="1">
+                                    ssh
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#安全" title="安全" rel="1">
+                                    安全
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#css" title="css" rel="1">
+                                    css
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#layout" title="layout" rel="1">
+                                    layout
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#responsive" title="responsive" rel="1">
+                                    responsive
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#life" title="life" rel="1">
+                                    life
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#film" title="film" rel="1">
+                                    film
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="4">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
+                                    functional programming
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工具" title="工具" rel="1">
+                                    工具
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://zhengwuyang.com">WY</a></li>
+                    
+                        <li><a href="http://www.jianshu.com/u/e71990ada2fd">简书·BY</a></li>
+                    
+                        <li><a href="https://apple.com">Apple</a></li>
+                    
+                        <li><a href="https://developer.apple.com/">Apple Developer</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

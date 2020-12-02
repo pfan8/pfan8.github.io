@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>PEP简介 - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-pep.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-pep.png')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#PEP" title="PEP">PEP</a>
+                        
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                        <a class="tag" href="/tags/#规范" title="规范">规范</a>
+                        
+                    </div>
+                    <h1>PEP简介</h1>
+                    
+                    
+                    <h2 class="subheading">Python Code Standard</h2>
+                    
+                    <span class="meta">Posted by pfan8 on July 1, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h2 id="pep是什么"><strong>PEP是什么？</strong></h2>
+
+<p>PEP的全称是<code class="language-plaintext highlighter-rouge">Python Enhancement Proposals</code>，其中Enhancement是增强改进的意思，Proposals则可译为提案或建议书，所以合起来，比较常见的翻译是<code class="language-plaintext highlighter-rouge">Python增强提案</code>或<code class="language-plaintext highlighter-rouge">Python改进建议书</code>。</p>
+
+<p>我个人倾向于前一个翻译，因为它更贴切。Python核心开发者主要通过邮件列表讨论问题、提议、计划等，PEP通常是汇总了多方信息，经过了部分核心开发者review和认可，最终形成的正式文档，起到了对外公示的作用，所以我认为翻译成“提案”更恰当。</p>
+
+<p>PEP的官网是：<a href="http://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/">https://www.python.org/dev/peps/</a>，这也就是PEP 0 的地址。其它PEP的地址是将编号拼接在后面，例如：<a href="http://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0020/">https://www.python.org/dev/peps/pep-0020/</a> 就是PEP 20 的链接，以此类推。</p>
+
+<p>第一个PEP诞生于2000年，现在正好是18岁成年。到目前为止，它拥有478个“兄弟姐妹”。</p>
+
+<p>官方将PEP分成三类:</p>
+
+<blockquote>
+  <p>I - Informational PEP
+ P - Process PEP
+ S - Standards Track PEP</p>
+
+</blockquote>
+
+<p>其含义如下:</p>
+
+<p>信息类：这类PEP就是提供信息，有告知类信息，也有指导类信息等等。例如PEP 20（The Zen of Python，即著名的Python之禅）、PEP 404 (Python 2.8 Un-release Schedule，即宣告不会有Python2.8版本)。</p>
+
+<p>流程类：这类PEP主要是Python本身之外的周边信息。例如PEP 1（PEP Purpose and Guidelines，即关于PEP的指南）、PEP 347（Migrating the Python CVS to Subversion，即关于迁移Python代码仓）。</p>
+
+<p>标准类：这类PEP主要描述了Python的新功能和新实践（implementation），是数量最多的提案。例如我之前推文《<a href="http://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/Whrd6NiD4Y2Z-YSCy4XJ1w">详解Python拼接字符串的七种方式</a>》提到过的f-string方式，它出自PEP 498（Literal String Interpolation，字面字符串插值）。</p>
+
+<p>每个PEP最初都是一个草案（Draft），随后会经历一个过程，因此也就出现了不同的状态。以下是一个流程图：</p>
+
+<blockquote>
+  <p>A – Accepted (Standards Track only) or Active proposal 已接受（仅限标准跟踪）或有效提案</p>
+
+  <p>D – Deferred proposal 延期提案</p>
+
+  <p>F – Final proposal 最终提案</p>
+
+  <p>P – Provisional proposal 暂定提案</p>
+
+  <p>R – Rejected proposal 被否决的提案</p>
+
+  <p>S – Superseded proposal 被取代的提案</p>
+
+  <p>W – Withdrawn proposal 撤回提案</p>
+</blockquote>
+
+<p>在PEP 0（Index of Python Enhancement Proposals (PEPs)）里，官方列举了所有的PEP，你可以按序号、按类型以及按状态进行检索。而在PEP 1（PEP Purpose and Guidelines）里，官方详细说明了PEP的意图、如何提交PEP、如何修复和更新PEP、以及PEP评审的机制等等。</p>
+
+<p>Meta-PEP列表</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">PEP</th>
+      <th style="text-align: center">PEP名称</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">PEP Purpose and Guidelines</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">Deprecation of Standard Modules</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">Guidelines for Language Evolution</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">Bug Fix Releases</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">Style Guide for C Code</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">Style Guide for Python Code</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">Voting Guidelines</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">Removing support for little used platforms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center">Sample reStructuredText PEP Template</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>以上仅列出主要PEP文件，更多PEP请参考<a href="https://www.python.org/dev/peps/">PEP0</a></p>
+
+<h2 id="为什么要读pep"><strong>为什么要读PEP？</strong></h2>
+
+<p>无论你是刚入门Python的小白、有一定经验的从业人员，还是资深的黑客，都应该阅读Python增强提案。</p>
+
+<p>依我之见，阅读PEP至少有如下好处:</p>
+
+<p>（1）了解Python有哪些特性，它们与其它语言特性的差异，为什么要设计这些特性，是怎么设计的，怎样更好地运用它们；</p>
+
+<p>（2）跟进社区动态，获知业内的最佳实践方案，调整学习方向，改进工作业务的内容；</p>
+
+<p>（3）参与热点议题讨论，或者提交新的PEP，为Python社区贡献力量。</p>
+
+<p>说到底，学会用Python编程，只是掌握了皮毛。<font color="red">**PEP提案是深入了解Python的途径，是真正掌握Python语言的一把钥匙，也是得心应手使用Python的一本指南。**</font></p>
+
+<h2 id="哪些pep是必读的"><strong>哪些PEP是必读的？</strong></h2>
+
+<p>如前所述，PEP提案已经累积产生了478个，我们并不需要对每个PEP都熟知，没有必要。下面，我列举了一些PEP，推荐大家一读：</p>
+
+<ul>
+  <li>PEP 0 – Index of Python Enhancement Proposals</li>
+  <li>PEP 7 – Style Guide for C Code，C扩展</li>
+  <li>PEP 8 – Style Guide for Python Code，Python编码规范（必读）</li>
+  <li>PEP 20 – The Zen of Python，Python之禅</li>
+  <li>PEP 202 – List Comprehensions，列表生成式</li>
+  <li>PEP 274 – Dict Comprehensions，字典生成式</li>
+  <li>PEP 234 – Iterators，迭代器</li>
+  <li>PEP 257 – Docstring Conventions，文档注释规范</li>
+  <li>PEP 279 – The enumerate() built-in function，enumerate枚举</li>
+  <li>PEP 282 – A Logging System，日志模块</li>
+  <li>PEP 285 – Adding a bool type，布尔值（建议阅读《<a href="http://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/YQbk0smMTCexsi3Ytd2AzA">Python对象的身份迷思：从全体公民到万物皆数</a>》）</li>
+  <li>PEP 289 – Generator Expressions，生成器表达式</li>
+  <li>PEP 318 – Decorators for Functions and Methods，装饰器</li>
+  <li>PEP 342 – Coroutines via Enhanced Generators，协程</li>
+  <li>PEP 343 – The “with” Statement，with语句</li>
+  <li>PEP 380 – Syntax for Delegating to a Subgenerator，yield from语法</li>
+  <li>PEP 405 – Python Virtual Environments，虚拟环境</li>
+  <li>PEP 471 – os.scandir() function，遍历目录</li>
+  <li>PEP 484 – Type Hints，类型约束</li>
+  <li>PEP 492 – Coroutines with async and await syntax，async/await语法</li>
+  <li>PEP 498 – Literal String Interpolation Python，字面字符串插值</li>
+  <li>PEP 525 – Asynchronous Generators，异步生成器</li>
+  <li>PEP 572 – Assignment Expressions，表达式内赋值（最具争议）</li>
+  <li>PEP 3105 – Make print a function，print改为函数</li>
+  <li>PEP 3115 – Metaclasses in Python 3000，元类</li>
+  <li>PEP 3120 – Using UTF-8 as the default source encoding，默认UTF-8</li>
+  <li>PEP 3333 – Python Web Server Gateway Interface v1.0.1，Web开发</li>
+  <li>PEP 8000 – Python Language Governance Proposal Overview，GvR老爹推出决策层后，事关新决策方案</li>
+</ul>
+
+<p>关于PEP，知乎上有两个问题，推荐大家关注：哪些PEP值得阅读（<a href="http://link.zhihu.com/?target=https%3A//dwz.cn/7CHMBlLu">https://dwz.cn/7CHMBlLu</a>），如何看待PEP 572（<a href="http://link.zhihu.com/?target=https%3A//dwz.cn/L46jpzMB">https://dwz.cn/L46jpzMB</a>）。</p>
+
+<h2 id="对pep的贡献"><strong>对PEP的贡献</strong></h2>
+
+<p>虽无确切数据作证，我国Python开发者的数量应该比任何国家都多。然而，纵观PEP 0 里面列举的200多个PEP作者，我只看到了一个像是汉语拼音的国人名字（不排除看漏，或者使用了英文名的）。反差真是太大了。</p>
+
+<p>我特别希望，国内的Python黑客们的名字，能越来越多地出现在那个列表里，出现在Python核心开发者的列表里。</p>
+
+<p>此外，关于对PEP的贡献，还有一种很有效的方式，就是将PEP翻译成中文，造福国内的Python学习社区。经过一番搜索，我还没有看到系统性翻译PEP的项目，只找到了零星的对于某个PEP的翻译。</p>
+
+<p>我用心搜集了几篇中文翻译成果，分享给大家：</p>
+
+<ul>
+  <li>PEP8 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/W01HexFD">https://dwz.cn/W01HexFD</a></li>
+  <li>PEP257 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/JLctlNLC">https://dwz.cn/JLctlNLC</a></li>
+  <li>PEP328 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/4vCQJpEP">https://dwz.cn/4vCQJpEP</a></li>
+  <li>PEP333 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/TAXIZdzc">https://dwz.cn/TAXIZdzc</a></li>
+  <li>PEP484 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/dSLZgg5B">https://dwz.cn/dSLZgg5B</a></li>
+  <li>PEP492 <a href="http://link.zhihu.com/?target=http%3A//t.cn/EALeaL0">http://t.cn/EALeaL0</a></li>
+  <li>PEP541 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/ce98vc27">https://dwz.cn/ce98vc27</a></li>
+  <li>PEP3107 <a href="http://link.zhihu.com/?target=http%3A//suo.im/4xFESR">http://suo.im/4xFESR</a></li>
+  <li>PEP3333 <a href="http://link.zhihu.com/?target=https%3A//dwz.cn/si3xylgw">https://dwz.cn/si3xylgw</a></li>
+</ul>
+
+<p>最后，表达一下我的私心：</p>
+
+<p>（1）希望本文能给大家带来知识和见识的增长，激发一些小伙伴的学习热情</p>
+
+<p>（2）希望有小伙伴去翻译更多的PEP，造福Python的中文学习社区</p>
+
+<h2 id="转载说明">转载说明</h2>
+
+<p>作者：豌豆花下猫</p>
+
+<p>链接：https://zhuanlan.zhihu.com/p/48993189</p>
+
+<p>来源：知乎</p>
+
+<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" data-toggle="tooltip" data-placement="top" title="PEP-08 Python代码规范">
+                        Previous<br>
+                        <span>PEP-08 Python代码规范</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/" data-toggle="tooltip" data-placement="top" title="Python知识点总结（包含部分Jupyter Notebook）">
+                        Next<br>
+                        <span>Python知识点总结（包含部分Jupyter Notebook）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#面试" title="面试" rel="2">
+                                    面试
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                                    Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工作" title="工作" rel="2">
+                                    工作
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PEP" title="PEP" rel="2">
+                                    PEP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="5">
+                                    Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#规范" title="规范" rel="3">
+                                    规范
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                                    Jupyter Notebook
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
+                                    小象学院
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#NLP" title="NLP" rel="2">
+                                    NLP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#模型" title="模型" rel="1">
+                                    模型
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
+                                    SOTA
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#算法" title="算法" rel="10">
+                                    算法
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
+                                    LSTM
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
+                                    深度学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#梯度" title="梯度" rel="1">
+                                    梯度
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#排序" title="排序" rel="1">
+                                    排序
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#总结" title="总结" rel="3">
+                                    总结
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#贪心" title="贪心" rel="1">
+                                    贪心
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
+                                    动态规划
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
+                                    数据结构
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#堆" title="堆" rel="1">
+                                    堆
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#栈" title="栈" rel="1">
+                                    栈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
+                                    背包问题
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#C++" title="C++" rel="1">
+                                    C++
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#STL" title="STL" rel="1">
+                                    STL
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#位运算" title="位运算" rel="2">
+                                    位运算
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
+                                    double pointer
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                                    快慢指针
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#链表" title="链表" rel="1">
+                                    链表
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#cpython" title="cpython" rel="1">
+                                    cpython
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                                    字符串匹配
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#github" title="github" rel="1">
+                                    github
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ssh" title="ssh" rel="1">
+                                    ssh
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#安全" title="安全" rel="1">
+                                    安全
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#css" title="css" rel="1">
+                                    css
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#layout" title="layout" rel="1">
+                                    layout
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#responsive" title="responsive" rel="1">
+                                    responsive
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#life" title="life" rel="1">
+                                    life
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#film" title="film" rel="1">
+                                    film
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="4">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
+                                    functional programming
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工具" title="工具" rel="1">
+                                    工具
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://zhengwuyang.com">WY</a></li>
+                    
+                        <li><a href="http://www.jianshu.com/u/e71990ada2fd">简书·BY</a></li>
+                    
+                        <li><a href="https://apple.com">Apple</a></li>
+                    
+                        <li><a href="https://developer.apple.com/">Apple Developer</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

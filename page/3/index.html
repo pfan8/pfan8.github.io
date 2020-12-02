@@ -10,7 +10,7 @@
     <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
     <meta name="theme-color" content="#000000">
     
-    <title>冬のBlog - 炮饭的博客 | PF Blog</title>
+    <title>冬のBlog - page 3 - 炮饭的博客 | PF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://pfan8.github.io/">
+    <link rel="canonical" href="http://pfan8.github.io/page/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -170,7 +170,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                 <div class="site-heading">
-                    <h1>冬のBlog</h1>
+                    <h1>冬のBlog - page 3</h1>
                     <!--<hr class="small">-->
                     <span class="subheading">冬が访れて 春がまだ远いですか</span>
                 </div>
@@ -197,332 +197,249 @@
 
 
 <div class="post-preview">
-    <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%80%BB%E7%BB%93/">
         <h2 class="post-title">
-            排序算法总结
+            算法复杂度简介
         </h2>
         
         <h3 class="post-subtitle">
-            经典排序算法时间、空间复杂度、思想、实现等
+            时间复杂度，空间复杂度，大O表示法
         </h3>
         
         <div class="post-content-preview">
-            一、时间复杂度总结
-
-
-1.1 排序算法划分
-
-排序算法的划分可以从几个不同的维度进行划分
-
-时间复杂度
-
-
-  平方阶 \(O(n^2)\)： 各类简单排序：直接插入、直接选择和冒泡排序。
-  线性对数阶 \(O(nlog(n^2))\)： 快速排序、堆排序、希尔排序和归并排序
-  线性阶 \(O(n)\)： 基数排序，此外还有桶、箱排序。
-
-
-空间维度
-
-如果要分析排序算法占用多少内存，...
+            前言
+由于实际生产中，输入数据通常会呈现数量级的增长，为了更好的衡量算法性能对系统本身造成的影响，就要分析算法以输入数量n为衡量标准的时间开销和内存/存储开销，即所谓的时间复杂度和空间复杂度。
+概念
+算法的时间复杂度(Time Complexity)，用来度量算法的运行时间，记作: T(n) = O(f(n))。它表示随着 输入大小n 的增大，算法执行需要的时间的增长速度可以用 f(n) 来...
         </div>
     </a>
     <p class="post-meta">
-        Posted by pfan8 | created on July 9, 2019 
+        Posted by pfan8 | created on July 3, 2019 
         
-        | updated on November 21, 2020
+        | updated on July 3, 2019
         
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/">
+    <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/">
         <h2 class="post-title">
-            NodeJS原理及大规模部署
+            编程常用缩写
         </h2>
         
         <h3 class="post-subtitle">
-            老袁の相声总结4
+            所有语言通用的命名规范
         </h3>
         
         <div class="post-content-preview">
-            Node作为中间层
+            在编程中我们经常会为了减小标识符的长度而采用缩写，这通常是通过去掉一些元音字母完成的，但更多的时候我们使用一些常用、通用的缩写，本人整理的网上的一些相关资料如下。
 
-Node现在大部分都是做中间层
+说明：
 
+1、本缩写表是《编码命名规范》的附录。
+
+2、本缩写表中列出的都是通用性缩写，不提供标准缩写，如：Win9x、COM 等。
+
+3、使用本缩写表里的缩写时，请对其进行必要的注释说明。
+
+4、除少数情况以外，大部分缩写与大...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pfan8 | created on July 2, 2019 
+        
+        | updated on July 2, 2019
+        
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/">
+        <h2 class="post-title">
+            XLNet总结
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Attention Mask部分的个人理解
+        </h3>
+        
+        <div class="post-content-preview">
+            XLNet是CMU提出的基于BERT思想的改进模型，在各大NLP测试集中表现优异，此处不详细介绍模型，想要了解可以看https://zhuanlan.zhihu.com/p/70220951以及https://cloud.tencent.com/developer/article/1454452，已经介绍得相当全面了，这里总结一下自己的理解。
+
+Attention Mask
+
+感叹XLNet...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pfan8 | created on July 2, 2019 
+        
+        | updated on July 2, 2019
+        
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/">
+        <h2 class="post-title">
+            Python知识点总结（包含部分Jupyter Notebook）
+        </h2>
+        
+        <h3 class="post-subtitle">
+            小象学院-AI校招课程
+        </h3>
+        
+        <div class="post-content-preview">
+            1. Python基本知识点
+
+%%writefile
+
+1.1 合法标识符
+
+
+  数字，下划线，字母构成
+  避开关键字
+  不能用数字开头
+
+
+如以下标识符取名错误
+for='chinahadoop.cn'
+7a=8
+str='小象学院'
+
+
+1.2 好的命名习惯让开发更有效率
 
   
-    
-      Web
-      Node
-      Java
-    
-  
-
-
-​          ==&gt;        ==&gt;
-
-可以做到以下几点，逐步进阶:
-
-
-  做路由，例如vue+node，也没有跨域问题
-  要SEO，可以做MPA，用Node+swig模板，甚至可以做DB
-  做SPA和M...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on November 17, 2020 
-        
-        | updated on November 17, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/11/15/I-Don't-Know-About-JS/">
-        <h2 class="post-title">
-            I Don't Know About JS
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结3
-        </h3>
-        
-        <div class="post-content-preview">
-            I don’t know about JS
-
-一、Additive &amp; Unary
-
-js中+,-,~都会把对象（甚至function）转换为表达式
-
-例如
-
-+function(){} // NaN
--function(){} // NaN
-~function(){} // -1
-+[] // 0
--[] // 0
-~[] // -1
-+{} // NaN
--{} // NaN
-~...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on November 15, 2020 
-        
-        | updated on November 15, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/">
-        <h2 class="post-title">
-            函数式编程与JS
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结2
-        </h3>
-        
-        <div class="post-content-preview">
-            函数式编程 （Functional Programming）
-
-一、函数式编程思维
-
-1.1 前言
-
-范畴论Category Theory
-
-
-  函数式编程是范畴论的数学分支，认为世界上所有概念体系都可以抽象成一个个范畴
-  彼此之间存在某种关系概念、事务、对象等等，都构成范畴。任何事物只要找出他们之间的关系，就能定义
-  箭头表示范畴成员之间的关系，正式的名称叫做”态射“（morphis...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 25, 2020 
-        
-        | updated on October 25, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/20/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            JavaScript基础知识点总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            老袁の相声总结
-        </h3>
-        
-        <div class="post-content-preview">
-            1.变量提升
-
-  变量提升：声明提升一层作用域，赋值则保留在词法环境中
-  函数提升：
-    
-      函数提升类似变量提升，提升一层作用域
-      但同时函数提升比变量提升强大，如果变量声明提升但是undefined，则忽略这个变量声明采用其上方的函数声明
-    
-  
-  变量提升和函数提升都只提升一层作用域，所以就害怕遇到函数，阻挡变量提升。同时函数也是通过这种机制实现私...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 20, 2020 
-        
-        | updated on October 20, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/">
-        <h2 class="post-title">
-            《夺冠》- Film reviews
-        </h2>
-        
-        <h3 class="post-subtitle">
-            观影有感
-        </h3>
-        
-        <div class="post-content-preview">
-            二刷《夺冠》，心中波涛翻涌，这部纪实的艺术给我带来许多触动，个人经历上有很多与之共鸣之处，同时也对一些问题深思过，得到以下观点：
-
-
-  体育竞技项目确实具有很强的不确定性，尤其是进入淘汰赛，电竞赛事也是小组赛发挥好的队伍通常都不是最后的冠军，尤其是大赛上。由此可见技巧是一方面，在大赛的环境下，更重要还是考验人的心态，因此有没有坚定的信念会显得格外重要。同时个人认为这也是体育类赛事的魅力之一...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pfan8 | created on October 1, 2020 
-        
-        | updated on October 1, 2020
-        
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/">
-        <h2 class="post-title">
-            CSS Position & CSS3 Display 总结
-        </h2>
-        
-        <h3 class="post-subtitle">
-            css布局样式
-        </h3>
-        
-        <div class="post-content-preview">
-            CSS: position属性
-
-
-  
-    relative：该模式会影响周围的DOM，可以通过top、buttom、left、right调整offset，下图很形象
-
-    
+    变量，函数或方法:salary,houseworker,booksname
   
   
-    absolute：不同于relative，absolute会锁定当前DOM在父容器的相对位置，这个父容器是最近的position为relative的DOM，会一直向上查找，直到body。同...
+  ...
         </div>
     </a>
     <p class="post-meta">
-        Posted by pfan8 | created on July 21, 2020 
+        Posted by pfan8 | created on July 2, 2019 
         
-        | updated on July 26, 2020
+        | updated on July 2, 2019
         
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2020/07/16/git-merge-&-rebase-&-cherry-pick/">
+    <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/">
         <h2 class="post-title">
-            Git Work Flow
+            PEP简介
         </h2>
         
         <h3 class="post-subtitle">
-            something you need to know for teamwork
+            Python Code Standard
         </h3>
         
         <div class="post-content-preview">
-            Preface
+            PEP是什么？
 
-Since I come to a place where I need to speak English everyday, I wanna have a try to post this blog with English, it seems intersting and challenging, even for the future, maybe we can se...
+PEP的全称是Python Enhancement Proposals，其中Enhancement是增强改进的意思，Proposals则可译为提案或建议书，所以合起来，比较常见的翻译是Python增强提案或Python改进建议书。
+
+我个人倾向于前一个翻译，因为它更贴切。Python核心开发者主要通过邮件列表讨论问题、提议、计划等，PEP通常是汇总了多方信息，经过了部分核心...
         </div>
     </a>
     <p class="post-meta">
-        Posted by pfan8 | created on July 16, 2020 
+        Posted by pfan8 | created on July 1, 2019 
         
-        | updated on July 16, 2020
+        | updated on July 1, 2019
         
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/">
+    <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
         <h2 class="post-title">
-            Github SSH配置
+            PEP-08 Python代码规范
         </h2>
         
         <h3 class="post-subtitle">
-            安全便捷的git环境
+            PEP 8 -- Style Guide for Python Code
         </h3>
         
         <div class="post-content-preview">
-            背景
+            为了让自己写的代码更加Pythonic，有必要细读PEP8，关于PEP的介绍参考本人的另一篇博客
 
-用公司的Github账号时登录有2FC的存在，导致本地git clone时候总是登录失败无法clone代码下来，在manager的建议下，采用SSH的方式登录github，跳过2FC的步骤，也不用再设置账号密码
+下面为正文，中文翻译自官网，参考自Python程序员分享的文章，但有一些翻译我觉得不妥，做了改动~
 
-步骤
+介绍
 
-https://help.github.com/en/github/authenticating-to-github/connecting-to-github-wi...
+本文档所提供的编码规范，适用于主要的Python发行版中组成标准库的Python代码。请参阅PEP关于Python的C实现的C编码风格指南的描述。
+
+本文档和PEP257（文档字符串规...
         </div>
     </a>
     <p class="post-meta">
-        Posted by pfan8 | created on June 21, 2020 
+        Posted by pfan8 | created on July 1, 2019 
         
-        | updated on June 21, 2020
+        | updated on July 1, 2019
         
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2020/05/19/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/">
+    <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/">
         <h2 class="post-title">
-            剑指offer总结
+            【牛客网】18年滴滴笔试题总结
         </h2>
         
         <h3 class="post-subtitle">
-            66题解法思路
+            First Blog！
         </h3>
         
         <div class="post-content-preview">
-            1.【数组】二维数组中的查找
+            总结一下做的笔试题，以免之后忘掉，但是作为第一篇博客，肯定写得简略些，毕竟从易到难，从简到繁嘛~嗯……
 
-题目描述
 
-在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+  首先关于机器学习部分，GBDT，AdaGrad，L-BFGS等部分果然很欠缺，需要尽快补充上（小象课程，既定目标-3天之内）
+  一个编解码问题，应该用到哈夫曼树（顿悟型，主要是没想到用，一看到评论区才想起来）
+  剩下的益智题都会做，正确率也高，但还需要细心
 
-Solution
 
-从左下角或者右上角开始查找，沿着一个方向找，因为这里二维矩阵的特性，导致一个元素的左上区域的所有元素必然比它小，同时其右下区域的所有元...
+OK，就先写到这...
         </div>
     </a>
     <p class="post-meta">
-        Posted by pfan8 | created on May 19, 2020 
+        Posted by pfan8 | created on June 29, 2019 
         
-        | updated on May 19, 2020
+        | updated on June 29, 2019
+        
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/11/20/iTerm2%E9%85%8D%E7%BD%AE/">
+        <h2 class="post-title">
+            iTerm2配置
+        </h2>
+        
+        <h3 class="post-subtitle">
+            如何愉悦地coding以及ZB
+        </h3>
+        
+        <div class="post-content-preview">
+            1. iTerm2 Intro
+
+本来说写一个iTerm介绍，去网上看一下官方说法。结果一查发现原来有很多feature自己完全不知道，白用了那么久的iTerm[捂脸]，所以用工具也要事先调研清楚啊，为什么要用以及有什么好用强大的功能都不知道，就显得水平low了
+
+P.S. 因为iTerm项目已经停止了，所以下面谈及iTerm请默认是指iTerm2，事实上现在也基本没人会用iTerm
+
+那么...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pfan8 | created on November 20, 2020 
         
     </p>
 </div>
@@ -533,10 +450,10 @@ Solution
 
 <ul class="pager">
     
-    
-    <li class="next">
-        <a href="/page/2/index.html">Older Posts &rarr;</a>
+    <li class="previous">
+        <a href="/page/2/index.html">&larr; Newer Posts</a>
     </li>
+    
     
 </ul>
 

@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>排序算法总结 - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-dsa.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-dsa.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                        <a class="tag" href="/tags/#排序" title="排序">排序</a>
+                        
+                        <a class="tag" href="/tags/#总结" title="总结">总结</a>
+                        
+                    </div>
+                    <h1>排序算法总结</h1>
+                    
+                    
+                    <h2 class="subheading">经典排序算法时间、空间复杂度、思想、实现等</h2>
+                    
+                    <span class="meta">Posted by pfan8 on July 9, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h2 id="一时间复杂度总结">一、时间复杂度总结</h2>
+<p><img src="https://miro.medium.com/max/745/1*ipkeWQ_Lb0lbkhB8rigxTA.png" alt="" /></p>
+
+<h2 id="11-排序算法划分">1.1 排序算法划分</h2>
+
+<p>排序算法的划分可以从几个不同的维度进行划分</p>
+
+<h3 id="时间复杂度">时间复杂度</h3>
+
+<ol>
+  <li>平方阶 \(O(n^2)\)： 各类简单排序：直接插入、直接选择和冒泡排序。</li>
+  <li>线性对数阶 \(O(nlog(n^2))\)： 快速排序、堆排序、希尔排序和归并排序</li>
+  <li>线性阶 \(O(n)\)： 基数排序，此外还有桶、箱排序。</li>
+</ol>
+
+<h3 id="空间维度">空间维度</h3>
+
+<p>如果要分析排序算法占用多少内存，是否需要外存就能完成排序等，可以分为以下几种排序</p>
+
+<ul>
+  <li>内部排序：若整个排序过程不需要访问外存便能完成，则称此类排序问题为内部排序。</li>
+  <li>外部排序：若参加排序的记录数量很大，整个序列的排序过程不可能在内存中完成，则称此类排序问题为外部排序。</li>
+  <li>就地排序：若排序算法所需的辅助空间并不依赖于问题的规模n，即辅助空间为O（1），称为就地排序。</li>
+</ul>
+
+<p>与其说用内部排序和外部排序来划分不同的排序算法，不如说内外排序是不同的算法策略</p>
+
+<ul>
+  <li>内部排序在加载数组进内存后，使用一种排序算法进行排序即可完成</li>
+  <li>而外部排序通常采用<strong>排序-归并</strong>，将指定大小的数据（如100M）加载进内存，使用内排中的某种排序算法（如快速排序、堆排序、归并排序等方法）在内存中完成排序，再讲排序完成的数据写入磁盘。不断重复上述过程，完成所有数据排序之后，对外存中排序好的数据进行归并处理。关于外部排序的详细描述，可以查看<a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F">wiki</a></li>
+</ul>
+
+<p>而就地排序则是针对排序算法是否需要使用额外辅助空间，常见排序算法的划分如下：</p>
+<ol>
+  <li>就地排序：冒泡排序、选择排序、插入排序、希尔排序、快速排序（如果不考虑递归函数空间的话）</li>
+  <li>非就地排序：堆排序、归并排序、桶排序、基数排序</li>
+</ol>
+
+<h3 id="元素相对位置">元素相对位置</h3>
+
+<p><strong>稳定排序</strong>：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序后，这些记录的相对次序保持不变，即在原序列中 ri=rj， ri 在 rj 之前，而在排序后的序列中，ri 仍在 rj 之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
+
+<ol>
+  <li>
+    <p>稳定：冒泡排序、插入排序、归并排序和基数排序。</p>
+  </li>
+  <li>
+    <p>非稳定：选择排序、快速排序、希尔排序、堆排序。</p>
+  </li>
+</ol>
+
+<h2 id="二经典排序算法">二、经典排序算法</h2>
+
+<h3 id="21-冒泡排序">2.1 冒泡排序</h3>
+
+<p>英文名称是 bubble sort</p>
+
+<p>已知一组无序数据a[0]、a[1]、……a[n-1]，需将其用冒泡排序按升序排列。</p>
+
+<p>首先比较a[0]与a[1]的值，若a[0]大于a[1]则交换两者的值，否则不变。再比较a[1]与a[2]的值，若a[1]大于a[2]，则交换两者的值，否则不变。以此类推。。。最后比较a[n-2]与a[n-1]的值。这样处理一轮后，a[n-1]的值一定是这组数据中最大的。</p>
+
+<p>再对a[0]~a[n-2]以相同方法处理一轮，则a[n-2]的值一定是a[0]~a[n-2]中最大的。以此类推。。。</p>
+
+<p>这样共处理 n-1 轮后a[0]、a[1]、……a[n-1]就以升序排列了。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Example
+待排序列    3    2    5    9    2
+
+第一轮
+
+第1次比较  2    3   5    9    2
+
+第2次比较  2    3    5    9    2
+
+第3次比较  2    3    5    9    2
+
+第4次比较  2    3    5    2  |  9
+
+第二轮
+
+第5次比较  2    3    5    2    9
+
+第6次比较  2    3    5    2    9
+
+第7次比较  2    3    2  |  5    9
+
+第三轮
+
+第8次比较  2    3    2    5    9
+
+第9次比较  2    2  |  3    5    9
+
+第四轮
+
+第10次比较  2  |  2    3   5    9
+</code></pre></div></div>
+
+<p>以上分割线左侧为下一轮的待排序序列，右侧为已排序好的序列。</p>
+
+<p>可以看到5个关键码组成的序列，经过4轮共计10次比较，比较次数是不变的，比较次数公式为：</p>
+
+\[n*(n-1)/2\]
+
+<p><strong>动画演示</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISwc3aGibUlvZ0XqVnbWtBRiaC1S2jpXRzXcZVn0aP6BYnkO2FJicNstxicHmf9wMIic5FV0I75ptv5jYA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="" /></p>
+
+<p><strong>算法评价</strong></p>
+
+<p>优点：如果你不是故意去交换相等的关键码的话，这个算法是绝对稳定的排序算法。</p>
+
+<p>缺点：比较次数也就是所谓的时间复杂度 为\(O(n^2)\)，最好的情况和最坏的情况都是\(O(n^2)\)</p>
+
+<p>从上面例子中，我们可以看到第一、二、三轮，2和3两个关键码重复比较了3次，很显然这不是令人满意的，那么如何解决这个问题呢？答案是快速排序</p>
+
+<p>事实上，虽然冒泡排序是最基本的经典算法，但现实中基本都使用快速排序，基本没有使用冒泡排序的scene了</p>
+
+<p><strong>代码实现</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">bubbleSort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="22-快速排序">2.2 快速排序</h3>
+
+<p>快速排序（Quicksort）是对冒泡排序的一种改进。</p>
+
+<p>快速排序由 Hoare 在1962年提出，以下是这位计算机科学家的大头照，是一位和蔼可亲的老头，哎，还是个秃子，不过对搞计算机的人来说，这并不足为奇！</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/FQd8gQcyN27HwIhqDopNUt5libA3icYfMmGiaKRZciax3dSPgKoDVbFJic7bcHDzUkukxlibqV7FndtQV9sqJEdgbVQw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="" /></p>
+
+<p><strong>快速排序的基本思想</strong></p>
+
+<ol>
+  <li>
+    <font color="red">通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。（Partition）</font>
+  </li>
+  <li>然后再按此方法对这其中一部分数据进行快速排序，这是递归调用。</li>
+  <li>再按此方法对另一部分数据进行快速排序，这也是递归调用。</li>
+</ol>
+
+<p>其中，Partition的思想非常有用，划分左右区间，分别满足不同的条件，在很多题目中可以利用partition做到快排的变种，下面给出的题目中可以看到</p>
+
+<p><strong>算法介绍</strong></p>
+
+<p>设要排序的数组是A[0]……A[n-1]</p>
+
+<p>首先任意选取一个数据作为关键数据，然后将所有比它小的数都放到它前面，所有比它大的数都放到它后面，这个过程称为一趟快速排序。</p>
+
+<p><strong>一趟快速排序算法</strong></p>
+
+<ol>
+  <li>设置两个变量 i、j，排序开始的时候：i=0，j=n-1；</li>
+  <li>以第一个数组元素作为关键数据，赋值给 pivot，即 pivot =A[0]；</li>
+  <li>从 j 开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于 pivot 的值A[j]，将 A[j] 和 A[i] 互换（互换保证了 A[j] &lt; A[i]，也就是保证了要趋向于前方的关键码都小于 pivot )；</li>
+  <li>从 i 开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于pivot 的A[i]，将 A[i] 和 A[j] 互换（互换保证了 A[j] &lt; A[i]，也就是保证了后方的关键码都大于 pivot ）</li>
+  <li>重复第3、4步，直到 i=j 。</li>
+  <li>完成本轮比较</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Example
+我们仍然以冒泡排序举的那个例子来模拟演示快速排序，待排序的序列为：
+
+ 3    2    5    9    2
+
+第一轮比较，选取第一个关键码 3 为pivot，初始值 i =0,  j =4，如下图圈1所示，
+</code></pre></div></div>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/FQd8gQcyN27HwIhqDopNUt5libA3icYfMmMpHZAafduVRcpibbc0IRW1icia0O7kBcKOJ95X9OdbJib6jpLpE0F7LqQA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="" /></p>
+
+<p>A[j]=5与pivot比较，因为后面的关键码2小，所以要与pivot交换，如圈2所示，大家注意看下，经过这一步操作，原来靠后的关键码2跑到了原先靠前的关键码2前方，<strong>所以快速排序不是稳定的排序算法</strong>。</p>
+
+<p>该到移动 i 的时候了，等到圈4的时候，关键码 5大于pivot，需要交换，让5放在pivot的后面，因为pivot后面的要比它大吗，如圈4所示。</p>
+
+<p>该到移动 j 的时候了，关键码9显然大于pivot，如圈5所示，所以 j 继续向前移动。</p>
+
+<p>j此时已经与i重合了，所以while循环终止，至此完成了第一轮迭代。</p>
+
+<p>可以看到pivot位置的变动，刚开始位于索引0处，然后又到最后位置，最后定格在索引2处。我们很幸运的是，经过本轮快排后，pivot=3把排序区间划分的比较均匀，前面有2个元素，后面也有2个元素，这是理想的！后面，我们在分析快排的性能时会意识到这个幸运的重要性！</p>
+
+<p>完成了第一轮迭代后，再就是对pivot前的区间再次执行上述操作，然后再对pivot后的区间也是执行上述操作。</p>
+
+<p>整个快速排序完成。</p>
+
+<p><strong>快排和冒泡的直观比较</strong></p>
+
+<p>上面这个例子，快速排序第一轮经过了5次比较，2次交换，使得Pivot将整个排序序列分割成两个独立的区间，前面都小于Pivot，后面都大于Pivot；前面区间只需要1次比较，0次交换即可完成；后面区间只需要1次比较，1次交换就可完成，因此总的比较次数为7次，交换次数为3次。</p>
+
+<p>而同样冒泡排序呢，由上节我们知道它需要10次比较，4次交换才能完成排序。</p>
+
+<p><strong>性能分析</strong></p>
+
+<p>最坏情况</p>
+
+<p>快速排序的最坏情况，实际上就退化为了冒泡排序的情况，想想冒泡排序，每一轮比较后，都将原来的排序好的区间增加了一个长度，也就是说快速排序每次选择的pivot也正好达成了冒泡排序的作用，那么最坏情况就此发生。简单来说，最坏情况发生在每次划分过程产生的两个区间分别包含n-1个元素和1个元素的时候。那么不难知道，最坏情况的复杂度也为 \(O(n^2)\)。</p>
+
+<p>最好情况</p>
+
+<p>如果每次划分过程产生的区间大小都为n/2，则快速排序法运行就快得多了，此时的时间复杂度为 \(O（nlogn）\)，logn表示以2为底，n的对数。因为每轮比较都会平均分成2个区间，共经过趋向于n轮的比较。</p>
+
+<p>平均情况</p>
+
+<p>平均情况和最好情况的时间复杂度都为\(O（nlogn）\)，只不过平均情况的常数因子可能大一些，有关详细分析，请查阅相关资料。</p>
+
+<p>Cons</p>
+
+<p>（1）快排是一个效率很高的排序算法，但是对于长度很小的序列，快排效率低。研究表明长度在5~25的数组，快排不如插入排序。</p>
+
+<p>（2）pivot选择不当，将导致树的不平衡，这样导致快排的时间复杂度为o(n^2);</p>
+
+<p>（3）但数组中有大量重复的元素，快排效率将非常之低。</p>
+
+<p><strong>快速排序的再改进</strong></p>
+
+<p><a href="https://yourbasic.org/golang/quicksort-optimizations/">对快速排序算法的改进</a>主要从以下几个方面：</p>
+<ol>
+  <li>pivot选取，取随机数，使快排更具有随机性</li>
+  <li>3-way partition</li>
+  <li>结合其他排序算法，短序列采用插入排序，长序列再采用快排</li>
+</ol>
+
+<p>这里不再详细描述，有空的话再补充</p>
+
+<p><strong>动画演示</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISwc3aGibUlvZ0XqVnbWtBRiaAY3VU8iaziaYcxAasTdrIu69BOVPYtfvqdvicmlJDS94cG2tjwZhVkdHA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="" /></p>
+
+<p><strong>代码实现</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">quickSort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">start</span> <span class="o">===</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">pivot</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="o">~~</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">start</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">start</span><span class="p">]];</span>
+  <span class="nx">start</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">pivot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">start</span><span class="p">,</span>
+    <span class="nx">r</span> <span class="o">=</span> <span class="nx">end</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">l</span> <span class="o">&lt;</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">l</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">r</span><span class="o">--</span><span class="p">;</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">r</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">r</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">]];</span>
+    <span class="nx">l</span><span class="o">++</span><span class="p">;</span>
+    <span class="nx">r</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">])</span> <span class="nx">l</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">l</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">]];</span>
+  <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">end</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong>相关题目</strong></p>
+
+<ul>
+  <li><a href="https://leetcode.com/problems/wiggle-sort-ii/">LeetCode 324. Wiggle Sort II</a></li>
+  <li><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/">LeetCode 215. Kth Largest Element in an Array</a></li>
+</ul>
+
+<p>上述题目对应的总结请查看个人<a href="https://github.com/pfan8/LeetCode/tree/master/%E6%8E%92%E5%BA%8F">Github项目</a>，需要提及的是利用快排的双指针和partition思想，能处理很多题目，因此要融会贯通</p>
+
+<h2 id="所有排序的动画与解析">所有排序的动画与解析</h2>
+<p>一个总结的很好的<a href="https://mp.weixin.qq.com/s/vn3KiV-ez79FmbZ36SX9lg">博客</a>，搬运ing</p>
+
+<h2 id="更多">更多</h2>
+<p>个人更多算法总结在<a href="https://github.com/pfan8/LeetCode">Github</a></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/" data-toggle="tooltip" data-placement="top" title="手撕LSTM梯度">
+                        Previous<br>
+                        <span>手撕LSTM梯度</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" data-toggle="tooltip" data-placement="top" title="面试总结（持续更新）">
+                        Next<br>
+                        <span>面试总结（持续更新）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#面试" title="面试" rel="2">
+                                    面试
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                                    Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工作" title="工作" rel="2">
+                                    工作
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PEP" title="PEP" rel="2">
+                                    PEP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="5">
+                                    Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#规范" title="规范" rel="3">
+                                    规范
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                                    Jupyter Notebook
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
+                                    小象学院
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#NLP" title="NLP" rel="2">
+                                    NLP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#模型" title="模型" rel="1">
+                                    模型
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
+                                    SOTA
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#算法" title="算法" rel="10">
+                                    算法
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
+                                    LSTM
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
+                                    深度学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#梯度" title="梯度" rel="1">
+                                    梯度
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#排序" title="排序" rel="1">
+                                    排序
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#总结" title="总结" rel="3">
+                                    总结
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#贪心" title="贪心" rel="1">
+                                    贪心
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
+                                    动态规划
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
+                                    数据结构
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#堆" title="堆" rel="1">
+                                    堆
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#栈" title="栈" rel="1">
+                                    栈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
+                                    背包问题
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#C++" title="C++" rel="1">
+                                    C++
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#STL" title="STL" rel="1">
+                                    STL
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#位运算" title="位运算" rel="2">
+                                    位运算
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
+                                    double pointer
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                                    快慢指针
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#链表" title="链表" rel="1">
+                                    链表
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#cpython" title="cpython" rel="1">
+                                    cpython
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                                    字符串匹配
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#github" title="github" rel="1">
+                                    github
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ssh" title="ssh" rel="1">
+                                    ssh
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#安全" title="安全" rel="1">
+                                    安全
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#css" title="css" rel="1">
+                                    css
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#layout" title="layout" rel="1">
+                                    layout
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#responsive" title="responsive" rel="1">
+                                    responsive
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#life" title="life" rel="1">
+                                    life
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#film" title="film" rel="1">
+                                    film
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="4">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
+                                    functional programming
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工具" title="工具" rel="1">
+                                    工具
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://zhengwuyang.com">WY</a></li>
+                    
+                        <li><a href="http://www.jianshu.com/u/e71990ada2fd">简书·BY</a></li>
+                    
+                        <li><a href="https://apple.com">Apple</a></li>
+                    
+                        <li><a href="https://developer.apple.com/">Apple Developer</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

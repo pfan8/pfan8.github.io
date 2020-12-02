@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Git Work Flow - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/2020/07/16/git-merge-&-rebase-&-cherry-pick/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-github-cup.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-github-cup.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#git" title="git">git</a>
+                        
+                    </div>
+                    <h1>Git Work Flow</h1>
+                    
+                    
+                    <h2 class="subheading">something you need to know for teamwork</h2>
+                    
+                    <span class="meta">Posted by pfan8 on July 16, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h1 id="preface">Preface</h1>
+
+<p>Since I come to a place where I need to speak English everyday, I wanna have a try to post this blog with English, it seems intersting and challenging, even for the future, maybe we can see a Janpanese blog too!!! =w= this idea came into my mind just now, but few seconds later I realize that’s gonna be a long way to go, however, nobody knows future except god. Ok, talk a load of garbage, let’s dig into Git flow!</p>
+
+<h1 id="team-workflow">Team workflow</h1>
+
+<p>In order to be clear to process of Git (or other version control tools), we need to take a landscape for team workflow, which will lift you up from concrete git command whenever you get confused with them.</p>
+
+<p>There are several workflows desgined by company managers who wants to make their team collaborate better, and the main ideas of different workflows will cause different solutions under conflict situation, I will talk this later. Actually, GitFlow is the most popular and worldwidely used workflow for team work, which works in my team.</p>
+
+<p>Gitflow Workflow is a Git workflow design which was first published and made popular by Vincent Driessen at nvie. The Gitflow Workflow defines a strict branching model designed around the project release. This provides a robust framework for managing larger projects.</p>
+
+<p>What I understand this workflow is that we make three type branches which will make managering different parts of code from different team members, they can take own’s work finished seperately and merged them togather easily. The main idea is to check carefully and log commit history made by every member, thus problem can be positioned and fixed faster.</p>
+
+<p>The next part is to introduce these 3 branches (<code class="language-plaintext highlighter-rouge">master</code>, <code class="language-plaintext highlighter-rouge">develop</code>, <code class="language-plaintext highlighter-rouge">feature</code>), once you fully understand the reason for seperating 3 branches and even higher level design thought, it’s impossible for you to make mistake on git commands. in fact, only a few patience you need to take to study this, then you will find the git world is open to you.</p>
+
+<h1 id="git-flow">Git flow</h1>
+
+<h2 id="master-and-develop-branches">Master and Develop branches</h2>
+
+<p>once you constructing your product, you must make every version work well and there should be few bugs for users who will use your product, your released product need to be stable, useful, and even friendly to user, which means if you build a web site or app, you may use the most powerful server to run application and thus make it faster. This will make some diffs between your release production and develop production, the former is used to serve your customer, the latter is used to develop new things (which is called <code class="language-plaintext highlighter-rouge">feature</code>, we will use this term later).Actually, we call the former branch in Gitflow <code class="language-plaintext highlighter-rouge">master</code> branch, which must be reviewed and tested before we make a new function (called <code class="language-plaintext highlighter-rouge">push a new commit</code>) into it, thus we can get a cleaner and safer branch to build and take them to user. For example, you can test many test cases which usually won’t happen, one of them is called <code class="language-plaintext highlighter-rouge">corner case</code>, such as a user sign up and cancel the account repeatly, this must be a rare case, but user can be upset if we cannot response to them correctly, even more, what if such action mess up our system and break other users? Yes, you may never see the actual situation, but I tend to think of it as a possibility model, you can imagine it like your interview, the more knowledge areas you coverd, the more possible for you to achieve it, of course these areas should be related to what the job or industry need. I thinks this metaphor is quite accurate.</p>
+
+<p>So, if you absord my words above, you will get what the picture here says: as for your <code class="language-plaintext highlighter-rouge">master</code> branch, there will be less but more stable commit, and on your <code class="language-plaintext highlighter-rouge">develop</code> branch, you can test more cases you wanna to check, it maybe a bug fix, or new feature, or backend/architecture’s optimazation. <strong>Make sure to sync develop branch with master branch once master branch push a new commit, only this way will make sence for Gitflow design.</strong></p>
+
+<p><img src="https://wac-cdn.atlassian.com/dam/jcr:2bef0bef-22bc-4485-94b9-a9422f70f11c/02%20(2).svg?cdnVersion=1131" alt="" /></p>
+
+<p>one more thing to say, you can use version number to signature each commit, or some other way which you can track your commit action or history by this tag (such as date info in my company, this is decided by your company rules), in industry they usually use three numbers, and make them togather to build version number, for example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V 1.2.0
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">V</code> means version, the first part <code class="language-plaintext highlighter-rouge">1</code> should be a baseline for your current production, if this part number changed, your must take a makeover to your product, which user can obviously feel. The second part <code class="language-plaintext highlighter-rouge">2</code> maybe several different develop flow, may be leaded by different team in big company, or just different aspect for your production, but it should also be quite a big change, and stable to use. The last part usually shows your new feature, you can let it to small part of your customer and get some feedback on these new features, therefore it may lead to bugs somehow, but worth. I believe the nightly version of some famous works such as VS-Code, Tensorflow, may work like this way. and you can also see them as that the first part of <code class="language-plaintext highlighter-rouge">1</code> means <code class="language-plaintext highlighter-rouge">master</code> branch, the second part of <code class="language-plaintext highlighter-rouge">2</code> means <code class="language-plaintext highlighter-rouge">develop</code> branch, the last <code class="language-plaintext highlighter-rouge">0</code> means <code class="language-plaintext highlighter-rouge">feature</code> branch. Of course, there are still some subtle difference between them, but you can get most part of it.</p>
+
+<p>I don’t want to say much to practice command and teach you step by step, because I believe the design idea/concept is a shorcut to mastering a skill/tool, once you get the idea, you can learn the related commands by yourself, it gonna be faster than the way I tell you them straightly, as long as the question is a consumption of the brain, this rule will always work, until now I don’t miss it.</p>
+
+<p>However, I will give several main commands for two reason:</p>
+<ol>
+  <li>log here for me if I forget them in the future</li>
+  <li>make this blog complete</li>
+</ol>
+
+<p>So, back to the topic of branch, if you want to create <code class="language-plaintext highlighter-rouge">master</code> branch and <code class="language-plaintext highlighter-rouge">develop</code> branch, you may use the following commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="c"># see all branches and HEAD info</span>
+git checkout master
+git pull
+git checkout <span class="nt">-b</span> develop
+git push <span class="nt">-u</span> origin develop
+</code></pre></div></div>
+
+<p>When using the git-flow extension library, executing git flow init on an existing repo will create the develop branch:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git flow init
+Initialized empty Git repository <span class="k">in</span> ~/project/.git/
+No branches exist yet. Base branches must be created now.
+Branch name <span class="k">for </span>production releases: <span class="o">[</span>master]
+Branch name <span class="k">for</span> <span class="s2">"next release"</span> development: <span class="o">[</span>develop]
+
+How to name your supporting branch prefixes?
+Feature branches? <span class="o">[</span>feature/]
+Release branches? <span class="o">[</span>release/]
+Hotfix branches? <span class="o">[</span>hotfix/]
+Support branches? <span class="o">[</span>support/]
+Version tag prefix? <span class="o">[]</span>
+
+<span class="nv">$ </span>git branch
+<span class="k">*</span> develop
+ master
+</code></pre></div></div>
+
+<h2 id="feature-branch">Feature branch</h2>
+
+<p>In Gitflow, what makes team work really works is <code class="language-plaintext highlighter-rouge">feature</code> branch, as I mentioned above, every unit task should be fullfilled in <code class="language-plaintext highlighter-rouge">feature</code> branch, which can be seperately coded by different member. Besides, one main advantage for <code class="language-plaintext highlighter-rouge">feature</code> branch is that we can easily backup specific commit which is completed by members who finished their test, other members can continue their work and wait for next commit on <code class="language-plaintext highlighter-rouge">develop</code> branch, thus to improve effciency of whole team work.</p>
+
+<p><img src="https://wac-cdn.atlassian.com/dam/jcr:b5259cce-6245-49f2-b89b-9871f9ee3fa4/03%20(2).svg?cdnVersion=1131" alt="" /></p>
+
+<p>In pracetice, team members usually code on their own feature branch and test on their local machine first, after first check, they can push feature branch to remote github repo and create a <code class="language-plaintext highlighter-rouge">PR</code>(pull request) which may need a reviewer in your team (usually your mentor or TM), after they approve code on your feature branch, the feature branch come to merge into develop branch, then test engineers or QA will test your function to check if these functions work well on test server, that’s the second check. After this double-check, it should be safe enough to merge new code to master. To avoid some accidents, you can leave new develop branch a few days before merging it into master branch, during the period your team member may use the test server and find some bugs which have not been found before, thus to make changes safer.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+git checkout <span class="nt">-b</span> feature_branch <span class="c"># the name is usually engineer's taskID and even adding engineer name</span>
+git commit
+git push <span class="c"># may push multiple times until engineer finishing task</span>
+
+<span class="c"># create a PR first on github</span>
+<span class="c"># it will merge them into specific branch(usually master or develop) automatically</span>
+<span class="c"># otherwise your TM can manually merge them as below</span>
+git checkout develop
+git merge feature_branch
+git push
+</code></pre></div></div>
+
+<h2 id="release-branch--hotfix-branch">Release branch &amp; Hotfix branch</h2>
+
+<p>there are still 2 extra type branches which is popular used, one is <code class="language-plaintext highlighter-rouge">release branch</code>, the other is <code class="language-plaintext highlighter-rouge">hotfix branch</code>, the former is more popular. I’d like to put them togather and seperate from <code class="language-plaintext highlighter-rouge">master</code>/<code class="language-plaintext highlighter-rouge">develop</code>/<code class="language-plaintext highlighter-rouge">feature</code> branches since the purpose and working style is different. The release branch or hotfix branch is more like a point, while master,develop and feature branch is line, use the picture to explain this:</p>
+
+<p><img src="https://wac-cdn.atlassian.com/dam/jcr:a9cea7b7-23c3-41a7-a4e0-affa053d9ea7/04%20(1).svg?cdnVersion=1134" alt="" /></p>
+
+<p>As you can see, the <code class="language-plaintext highlighter-rouge">release branch</code> will be created only when we want to merge <code class="language-plaintext highlighter-rouge">develop</code> into <code class="language-plaintext highlighter-rouge">master</code>, this way can be more formal and easy to track history. Moreover, a team usually have a plan for the future tasks, with release branch TM can check and glance over what we have done, thus to get a clear mind on strategy steps. Therefore, <code class="language-plaintext highlighter-rouge">release branch</code> may exist only for few days, generally one day. Once merged into <code class="language-plaintext highlighter-rouge">master branch</code>, their mission is complete with lifecycle ending, since then they will not and should not be checkout from, if you want to start a new feature branch, you need to checkout from master, or at least develop branch, which can ensure your branch history clean and correctly. Until now, I found that <strong>most conflicts are stemmed from here, if you don’t checkout from <code class="language-plaintext highlighter-rouge">master branch</code>, your code can be dirty, it means your feature branch will have some commits by others which shouldn’t been merged into master</strong>. Even checkout from <code class="language-plaintext highlighter-rouge">develop branch</code> can be polluted because some new features on test server may not take into <code class="language-plaintext highlighter-rouge">release branch</code>, maybe still under testing or canceled according to later design.</p>
+
+<p>The other type of “point” branch is <code class="language-plaintext highlighter-rouge">hotfix branch</code>, actually saying, it is not used in my company, I think small company or some team not so formal won’t use it too. However, if you want to use it, hotfix on your production can be tracked easier of course.</p>
+
+<p><code class="language-plaintext highlighter-rouge">hotfix branch</code> is created when some bugs or a small function need to be added or fixed ASAP, since it maybe found by your user/customer, your reaction to them can result in different user experience and reflect your team ability to users in some sence, if it takes you long time to fix a small bug, user will lower their ratings to your product and company, need attention.</p>
+
+<p>In practice, if you want to create a <code class="language-plaintext highlighter-rouge">release branch</code> or <code class="language-plaintext highlighter-rouge">hotfix branch</code>, the command is same as above, difference is these two branches can be merged into <code class="language-plaintext highlighter-rouge">master branch</code> directly after artificial check. As for the diff betweens release and hotfix, <code class="language-plaintext highlighter-rouge">release branch</code> will merge other function in <code class="language-plaintext highlighter-rouge">feature branch</code> or <code class="language-plaintext highlighter-rouge">develop branch</code>, but <code class="language-plaintext highlighter-rouge">hotfix branch</code> won’t merge any other branch, engineer will code on this branch immediately, thus reducing product online time.</p>
+
+<p>For example</p>
+<ul>
+  <li><strong>release branch</strong>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master <span class="c"># it can be master or develop, master suggested</span>
+git checkout <span class="nt">-b</span> release/0.1.0
+git merge feature <span class="c"># do multiple times, merge everything you want to release</span>
+git push
+git checkout master
+git merge release/0.1.0
+</code></pre></div>    </div>
+  </li>
+  <li><strong>hotfix branch</strong>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+git checkout <span class="nt">-b</span> hotfix_branch
+git checkout master
+git merge hotfix_branch
+git checkout develop
+git merge hotfix_branch
+git branch <span class="nt">-D</span> hotfix_branch <span class="c"># don't forget leave message on merging master branch </span>
+                          <span class="c"># if you don't want to remain hotfix_branch</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1134" alt="" /></p>
+
+<p>Then we can dig into git command <code class="language-plaintext highlighter-rouge">merge</code>,<code class="language-plaintext highlighter-rouge">rebase</code> and <code class="language-plaintext highlighter-rouge">cherry-pick</code>, they are all used to resolve conflict situation, although small difference here, you need to identify scenario</p>
+
+<h2 id="review">Review</h2>
+
+<p>I introduce common branches of Git flow so far, if you catch up with me, you should have an idea about git flow and landscape in mind. As what I said, if you truely understand the design thought of Git flow, you shouldn’t be confused with problems you may get in your work, like what I will say next —— confilict. Leave a graph here to help you review these branches:</p>
+
+<p><img src="https://nvie.com/img/git-model@2x.png" alt="" /></p>
+
+<h1 id="command-to-resolve-conflict">Command to resolve conflict</h1>
+
+<p>Since understanding why people use something is important, be familiar with the way to use it is also important, just like manual worker may not rethink usually, their key to profession is just practice, practice more until body memory comes, engineers will also need it, anyway, 10000 hours makes a expert is what I agreed.</p>
+
+<p>There is a list of main git command which is being used mostly (at least for me):</p>
+
+<ul>
+  <li>git checkout</li>
+  <li>git checkout -b <code class="language-plaintext highlighter-rouge">branch_name</code></li>
+  <li>git branch</li>
+  <li>git add -u (-u, –update          update tracked files)</li>
+  <li>git commit -n (into vim, with -m just input message inline)</li>
+  <li>git push -n</li>
+  <li>git pull</li>
+  <li>git reset –hard <code class="language-plaintext highlighter-rouge">origin</code></li>
+  <li>git stash</li>
+  <li>git stash list</li>
+  <li>git stash pop</li>
+  <li>git diff <code class="language-plaintext highlighter-rouge">commit_1</code> <code class="language-plaintext highlighter-rouge">commit_2</code></li>
+  <li>git merge</li>
+  <li>git rebase</li>
+  <li>git cherry-pick</li>
+</ul>
+
+<p>I don’t want to explain them carefully, if you are not familiar with them, you can and should learn them by yourself, maybe search them on Internet like Baidu or Google, I think ti’s also a basic ability for software engineer. One more thing to say, official documents is always a good choice.</p>
+
+<p>However, I will explain <code class="language-plaintext highlighter-rouge">merge</code>/<code class="language-plaintext highlighter-rouge">rebase</code>/<code class="language-plaintext highlighter-rouge">cherry-pick</code> commands following, because these 3 commands should be hard to get, and they are all used when branch conflicts. List them togather will also make it clearly to compare between each other.</p>
+
+<h2 id="merge">merge</h2>
+
+<p><img src="https://cdn-media-1.freecodecamp.org/images/VonhijTBQgjwtRXz31wLzF7iWDnDFk2o8EWi" alt="" /></p>
+
+<p>Git merge is a common practice for developers to use when meet conflicts between 2 branches, under your branch, merge the other branch you wanna merged into yours, usually git will automatically generate a combined version code, but it will also generate the version which you don’t want, at least in my cases. For example, it may use the code of others which you wanna replaced with yours, and in turn replaced origin code by yours which you want you use theirs. So merge files manually is what I suppose, when you get a file need you to decide which commit fit, it will be like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here are lines that are either unchanged from the common
+ancestor, or cleanly resolved because only one side changed.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; yours:sample.txt
+Conflict resolution is hard;
+let's go shopping.
+|||||||
+Conflict resolution is hard.
+=======
+Git makes conflict resolution easy.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; theirs:sample.txt
+And here is another line that is cleanly resolved or unmodified.
+</code></pre></div></div>
+
+<p>you need to choose which one remains and delete extra content including marks</p>
+
+<p>An merge arg usually been used in this way:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git merge <span class="nt">--no-ff</span>
+</code></pre></div></div>
+
+<p>it will enforce git merge create a new commit with merge message, otherwise git may merge branches in a fast-forward way, which means if git find your branch is derived from master branch, it may be delete some commits automatically, which managers may not want, the need more infos on branch line, not less.</p>
+
+<h2 id="rebase">rebase</h2>
+
+<p>Rebase is another way to integrate changes from one branch to another. Rebase compresses all the changes into a single “patch.” Then it integrates the patch onto the target branch.</p>
+
+<p>Unlike merging, rebasing flattens the history because it transfers the completed work from one branch to another. In the process, unwanted history is eliminated.</p>
+
+<p><img src="https://cdn-media-1.freecodecamp.org/images/aEjZMJ6s4rDVqzXveqgLrwkQ0RJEvOTjAIUc" alt="" /></p>
+
+<p>In my experience, <code class="language-plaintext highlighter-rouge">git rebase</code> works well in the situation that you reverted your commits from which have been merged into main branches (like master or develop) before, it will clean those redundant commits and infos, make your PR clean and easy to read for your reviewer. I’m not sure if it’s what I understand, you can somehow refer it.</p>
+
+<p>As the graphs shown above, as for rebase will lost more informations for branch, <strong>you should use <code class="language-plaintext highlighter-rouge">merge</code> command as possible as you can, check carefully if the scenario suits for <code class="language-plaintext highlighter-rouge">rebase</code> before you use it</strong></p>
+
+<h2 id="cherry-pick">cherry-pick</h2>
+
+<p><code class="language-plaintext highlighter-rouge">cherry-pick</code> is a powerful and magic command to use, it’s subtle because it can pick specific commit you want and put it on your current branch, and the picked commit may from other branch. Take a look at this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    a - b - c - d   Master
+            \
+            e - f - g Feature
+</code></pre></div></div>
+
+<p>you create Feature branch from c commits of Master, if you use the following commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout feature
+git pull
+git checkout master
+git cherry-pick f
+</code></pre></div></div>
+
+<p>then the branch graph will be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    a - b - c - d - f   Master
+         \
+           e - f - g Feature
+</code></pre></div></div>
+
+<p>you can see we “pick” f commit into master branch ! wonderful, so if you have messy history on your branch because of checking out from a dirty branch, then you can use <code class="language-plaintext highlighter-rouge">cherry-pick</code> to pick your own changes into master or other main branch you wanna merged into.</p>
+
+<p>My colleague said she treat ‘git rebase’ as multiple times <code class="language-plaintext highlighter-rouge">git cherry-pick</code>, it sounds right, maybe this metaphor can help you understand these two commands. However, you may find rebase more automatically so that it may generate what you don’t want, use cherry-pick can be s little bit complicated but definitely what you want.</p>
+
+<h1 id="after-words">After words</h1>
+
+<p>It takes me three days to complete this blog, but look back to it, interesting stuff indeed, I don’t know if it’s worth, I finished it anyway.</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/" data-toggle="tooltip" data-placement="top" title="Github SSH配置">
+                        Previous<br>
+                        <span>Github SSH配置</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="CSS Position & CSS3 Display 总结">
+                        Next<br>
+                        <span>CSS Position & CSS3 Display 总结</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#面试" title="面试" rel="2">
+                                    面试
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                                    Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工作" title="工作" rel="2">
+                                    工作
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PEP" title="PEP" rel="2">
+                                    PEP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="5">
+                                    Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#规范" title="规范" rel="3">
+                                    规范
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                                    Jupyter Notebook
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
+                                    小象学院
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#NLP" title="NLP" rel="2">
+                                    NLP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#模型" title="模型" rel="1">
+                                    模型
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
+                                    SOTA
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#算法" title="算法" rel="10">
+                                    算法
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
+                                    LSTM
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
+                                    深度学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#梯度" title="梯度" rel="1">
+                                    梯度
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#排序" title="排序" rel="1">
+                                    排序
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#总结" title="总结" rel="3">
+                                    总结
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#贪心" title="贪心" rel="1">
+                                    贪心
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
+                                    动态规划
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
+                                    数据结构
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#堆" title="堆" rel="1">
+                                    堆
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#栈" title="栈" rel="1">
+                                    栈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
+                                    背包问题
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#C++" title="C++" rel="1">
+                                    C++
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#STL" title="STL" rel="1">
+                                    STL
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#位运算" title="位运算" rel="2">
+                                    位运算
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
+                                    double pointer
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                                    快慢指针
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#链表" title="链表" rel="1">
+                                    链表
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#cpython" title="cpython" rel="1">
+                                    cpython
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                                    字符串匹配
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#github" title="github" rel="1">
+                                    github
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ssh" title="ssh" rel="1">
+                                    ssh
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#安全" title="安全" rel="1">
+                                    安全
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#css" title="css" rel="1">
+                                    css
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#layout" title="layout" rel="1">
+                                    layout
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#responsive" title="responsive" rel="1">
+                                    responsive
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#life" title="life" rel="1">
+                                    life
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#film" title="film" rel="1">
+                                    film
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="4">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
+                                    functional programming
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工具" title="工具" rel="1">
+                                    工具
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://zhengwuyang.com">WY</a></li>
+                    
+                        <li><a href="http://www.jianshu.com/u/e71990ada2fd">简书·BY</a></li>
+                    
+                        <li><a href="https://apple.com">Apple</a></li>
+                    
+                        <li><a href="https://developer.apple.com/">Apple Developer</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

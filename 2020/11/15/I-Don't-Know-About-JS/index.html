@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>I Don't Know About JS - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/2020/11/15/I-Don't-Know-About-JS/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-github-cup.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-github-cup.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+                        
+                    </div>
+                    <h1>I Don't Know About JS</h1>
+                    
+                    
+                    <h2 class="subheading">老袁の相声总结3</h2>
+                    
+                    <span class="meta">Posted by pfan8 on November 15, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+		     <div id="toc"></div>
+
+				<h1 id="i-dont-know-about-js">I don’t know about JS</h1>
+
+<h2 id="一additive--unary">一、Additive &amp; Unary</h2>
+
+<p>js中<code class="language-plaintext highlighter-rouge">+</code>,<code class="language-plaintext highlighter-rouge">-</code>,<code class="language-plaintext highlighter-rouge">~</code>都会把对象（甚至function）转换为表达式</p>
+
+<p>例如</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span><span class="kd">function</span><span class="p">(){}</span> <span class="c1">// NaN</span>
+<span class="o">-</span><span class="kd">function</span><span class="p">(){}</span> <span class="c1">// NaN</span>
+<span class="o">~</span><span class="kd">function</span><span class="p">(){}</span> <span class="c1">// -1</span>
+<span class="o">+</span><span class="p">[]</span> <span class="c1">// 0</span>
+<span class="o">-</span><span class="p">[]</span> <span class="c1">// 0</span>
+<span class="o">~</span><span class="p">[]</span> <span class="c1">// -1</span>
+<span class="o">+</span><span class="p">{}</span> <span class="c1">// NaN</span>
+<span class="o">-</span><span class="p">{}</span> <span class="c1">// NaN</span>
+<span class="o">~</span><span class="p">{}</span> <span class="c1">// -1</span>
+</code></pre></div></div>
+
+<p>But！你以为你就懂JS了吗？too young too simple，看看下面这些，猜猜结果是什么?</p>
+
+<ul>
+  <li>[] + []</li>
+  <li>{} + []</li>
+  <li>[] + {}</li>
+  <li>{} + {}</li>
+  <li>{} + {};</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>结</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>果</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>如</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>下</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>↓ （Chrome和Node的运行结果）</p>
+
+<ul>
+  <li>[] + [] // “”</li>
+  <li>{} + [] // 0</li>
+  <li>{} + []; // [object object]</li>
+  <li>[] + {} // [object object]</li>
+  <li>{} + {} // [object object][object object]</li>
+  <li>{} + {}; // NaN</li>
+</ul>
+
+<p>神不神奇，就问你神不神奇！</p>
+
+<p>================= 华丽的分割线 =================</p>
+
+<p>首先，在ECMA中，<code class="language-plaintext highlighter-rouge">+</code>这个符号，有2种操作（赋值类的<code class="language-plaintext highlighter-rouge">+=</code>可以涵盖在additive中）：</p>
+
+<ul>
+  <li>unary</li>
+  <li>additive</li>
+</ul>
+
+<p>unary的含义是一元操作符，顾名思义，处理成unary是因为JS的解释器认为目前只有一个操作对象，如果认为有2个对象，则会处理成additive。</p>
+
+<p><strong>那么unary和additive有什么区别呢？</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">+</code>的unary很简单，直接toNumber，关于ToNumber对JS原生对象的映射关系如下(ECMA2020)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Argument Type</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Undefined</td>
+      <td>Return <strong>NaN</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Null</td>
+      <td>Return <strong>+0</strong><sub>𝔽</sub></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Boolean</td>
+      <td>If argument is true, return <strong>1<sub>𝔽</sub></strong><br />If argument is false, return <strong>+0</strong><sub>𝔽</sub></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Number</td>
+      <td>Return argument (no conversion)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">String</td>
+      <td>See grammar and conversion algorithm below</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Symbol</td>
+      <td>Throw a TypeError exception</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BigInt</td>
+      <td>Throw a TypeError exception</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Object</td>
+      <td>Apply the following steps:<br />1. Let primValue be ? ToPrimitive(argument, number)<br />2. Return ? ToNumber(primValue)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Object的转换稍微有点复杂，关于ToPrimitive，下面会介绍。</p>
+
+<p>下面我们看additive operation，相比unary，这个操作就复杂一些了。ECMA2020中关于additive operation这样说：</p>
+
+<blockquote>
+  <p>The addition operator either performs string concatenation or numeric addition.</p>
+</blockquote>
+
+<p>其实意思就是判断应该做number还是string的转换，然后相加或者拼接。</p>
+
+<p>additive具体的步骤是：</p>
+
+<blockquote>
+  <p>If opText is <code class="language-plaintext highlighter-rouge">+</code>, then</p>
+
+  <ol>
+    <li>Let lprim be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(lval).</li>
+    <li>Let rprim be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(rval).</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(lprim) is String or <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (rprim) is String, then</li>
+    <li>Let lstr be ? <a href="https://tc39.es/ecma262/#sec-tostring">ToString</a>(lprim).</li>
+    <li>Let rstr be ? <a href="https://tc39.es/ecma262/#sec-tostring">ToString</a>(rprim).</li>
+    <li>Return the <a href="https://tc39.es/ecma262/#string-concatenation">string-concatenation</a> of lstr and rstr.</li>
+    <li>Set lval to lprim.</li>
+    <li>Set rval to rprim.</li>
+  </ol>
+</blockquote>
+
+<p>以及容易被忽略的一个NOTE</p>
+
+<blockquote>
+  <p>No hint is provided in the calls to <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a> in steps <a href="https://tc39.es/ecma262/#step-binary-op-toprimitive-lval">1.a</a> and <a href="https://tc39.es/ecma262/#step-binary-op-toprimitive-rval">1.b</a>. All standard objects except Date objects handle the absence of a hint as if number were given; Date objects handle the absence of a hint as if string were given. Exotic objects may handle the absence of a hint in some other manner.</p>
+</blockquote>
+
+<p>因此，当出现+（additive operation），就会对两个值进行ToPrimitive转换，转换完之后如果发现任意一个值是string，就全部转换为string再拼接，否则作为数值相加。Note说对于Date对象给hint是string，而其他object，如果hint没有指定就默认number。由于[]和{}都是object，所以ToPrimitive的hint是number</p>
+
+<p>那么toPromitive又是什么rule：</p>
+
+<blockquote>
+  <ol>
+    <li><a href="https://tc39.es/ecma262/#assert">Assert</a>: input is an <a href="https://tc39.es/ecma262/#sec-ecmascript-language-types">ECMAScript language value</a>.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(input) is Object, then
+      <ol>
+        <li>Let exoticToPrim be ? <a href="https://tc39.es/ecma262/#sec-getmethod">GetMethod</a>(input, <a href="https://tc39.es/ecma262/#sec-well-known-symbols">@@toPrimitive</a>).</li>
+        <li>If exoticToPrim is not <code class="language-plaintext highlighter-rouge">undefined</code> , then
+          <ol>
+            <li>If preferredType is not present, let hint be “default”.</li>
+            <li>Else if preferredType is string, let hint be “string”.</li>
+            <li>Else,
+              <ol>
+                <li><a href="https://tc39.es/ecma262/#assert">Assert</a>: preferredType is number.</li>
+                <li>Let hint be “number”.</li>
+              </ol>
+            </li>
+            <li>Let result be ? <a href="https://tc39.es/ecma262/#sec-call">Call</a>(exoticToPrim, input, « hint »).</li>
+            <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(result) is not Object, return result.</li>
+            <li>Throw a TypeError exception.</li>
+          </ol>
+        </li>
+        <li>If preferredType is not present, let preferredType be number.</li>
+        <li>Return ? <a href="https://tc39.es/ecma262/#sec-ordinarytoprimitive">OrdinaryToPrimitive</a>(input, preferredType).</li>
+      </ol>
+    </li>
+    <li>Return input.</li>
+  </ol>
+</blockquote>
+
+<p>这里纠结了很久，想半天，按照exoticToPrim来算，就不应该是toString的结果（例如[]+[]是”“），而且@@toPrimitive找半天没找到，又在想是不是在additive之前有一个GetValue导致[]已经转换成”“了，结果看了半天GetValue和@@toPrimitive。事实上GetValue还是返回原值（对于Reference的[]就是自身），而@@toPrimitive对Array就不存在，从而exoticToPrim就是undefined（我摔！），exoticToPrim和@@toPrimitive都是针对Date对象的特殊处理。总而言之，言而总之，对于[]或者{}来说，它们都是走OrdinaryToPrimitive的method，下面是这个func定义</p>
+
+<blockquote>
+  <ol>
+    <li>Assert: Type(O) is Object.</li>
+    <li>Assert: hint is either string or number.</li>
+    <li>If hint is string, then
+      <ol>
+        <li>Let methodNames be « “<strong>toString</strong>”, “<strong>valueOf</strong>” ».</li>
+      </ol>
+    </li>
+    <li>Else,
+      <ol>
+        <li>Let methodNames be « “<strong>valueOf</strong>”, “<strong>toString</strong>” ».</li>
+      </ol>
+    </li>
+    <li>For each element name of methodNames, do
+      <ol>
+        <li>Let method be ? Get(O, name).</li>
+        <li>If IsCallable(method) is <strong>true</strong>, then
+          <ol>
+            <li>Let result be ? Call(method, O).</li>
+            <li>If Type(result) is not Object, return result.</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li>Throw a <strong>TypeError</strong> exception.</li>
+  </ol>
+</blockquote>
+
+<p>瞬间就明朗了，就算hint是number，先取valueOf，得到[]自身，并不是primitive value，因此再一次toString了。因此[]转换成’‘，{}转换成’[object object]’。同时，如果你注意unary的Object处理rule，是先toPrimitive，然后再toNumber，所以对[]，相当于toNumber(‘’)；对{}，相当于toNumber(‘[object object]’)，从而得到0和NaN，如此就很make sense</p>
+
+<h2 id="二-comparison-operationrelationalequality">二、 Comparison Operation（Relational/Equality）</h2>
+
+<p>还有一些神奇的表达式操作：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kc">NaN</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="kc">NaN</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="kc">NaN</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="kc">NaN</span> <span class="o">==</span> <span class="kc">NaN</span>
+<span class="c1">// above are all false, as expected, but let's see below</span>
+<span class="kc">null</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="c1">// true</span>
+<span class="kc">null</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="c1">// true</span>
+<span class="kc">null</span> <span class="o">==</span> <span class="mi">0</span> <span class="c1">// false</span>
+<span class="kc">null</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="c1">// false</span>
+<span class="kc">null</span> <span class="o">==</span> <span class="kc">null</span> <span class="c1">// true</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="kc">null</span> <span class="c1">// 1</span>
+<span class="k">typeof</span> <span class="kc">null</span> <span class="c1">// "object"</span>
+</code></pre></div></div>
+
+<p>历史遗留问题：判断object是二进制前4位是不是0，然而null全部是0</p>
+
+<p>对于null，是一种单独的Type，所以对于Type(x)或者ToPrimitive(x)，null就是原值，并不会转换</p>
+
+<p>那么继续研究ECMA：</p>
+
+<ul>
+  <li>对Abstract Relational Comparison</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>If the LeftFirst flag is true, then
+      <ol>
+        <li>Let px be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(x, number).</li>
+        <li>Let py be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(y, number).</li>
+      </ol>
+    </li>
+    <li>Else,
+      <ol>
+        <li>NOTE: The order of evaluation needs to be reversed to preserve left to right evaluation.</li>
+        <li>Let py be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(y, number).</li>
+        <li>Let px be ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(x, number).</li>
+      </ol>
+    </li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (px) is String and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (py) is String, then
+      <ol>
+        <li>If <a href="https://tc39.es/ecma262/#sec-isstringprefix">IsStringPrefix</a>(py, px) is true, return false.</li>
+        <li>If <a href="https://tc39.es/ecma262/#sec-isstringprefix">IsStringPrefix</a>(px, py) is true, return true.</li>
+        <li>Let k be the smallest non-negative <a href="https://tc39.es/ecma262/#integer">integer</a> such that the code unit at index k within px is different from the code unit at index k within py. (There must be such a k, for neither String is a prefix of the other.)</li>
+        <li>Let m be the <a href="https://tc39.es/ecma262/#integer">integer</a> that is the numeric value of the code unit at index k within px.</li>
+        <li>Let n be the <a href="https://tc39.es/ecma262/#integer">integer</a> that is the numeric value of the code unit at index k within py.</li>
+        <li>If m &lt; n, return true. Otherwise, return false.</li>
+      </ol>
+    </li>
+    <li>Else,
+      <ol>
+        <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (px) is BigInt and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (py) is String, then
+          <ol>
+            <li>Let ny be ! <a href="https://tc39.es/ecma262/#sec-stringtobigint">StringToBigInt</a>(py).</li>
+            <li>If ny is NaN, return undefined.</li>
+            <li>Return BigInt::lessThan(px, ny).</li>
+          </ol>
+        </li>
+        <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (px) is String and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (py) is BigInt, then
+          <ol>
+            <li>Let nx be ! <a href="https://tc39.es/ecma262/#sec-stringtobigint">StringToBigInt</a>(px).</li>
+            <li>If nx is NaN, return undefined.</li>
+            <li>Return BigInt::lessThan(nx, py).</li>
+          </ol>
+        </li>
+        <li>NOTE: Because px and py are primitive values, evaluation order is not important.</li>
+        <li>Let nx be ! <a href="https://tc39.es/ecma262/#sec-tonumeric">ToNumeric</a>(px).</li>
+        <li>Let ny be ! <a href="https://tc39.es/ecma262/#sec-tonumeric">ToNumeric</a>(py).</li>
+        <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(nx) is the same as <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(ny), return <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(nx)::lessThan(nx, ny).</li>
+        <li><a href="https://tc39.es/ecma262/#assert">Assert</a>: <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(nx) is BigInt and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(ny) is Number, or <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(nx) is Number and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(ny) is BigInt.</li>
+        <li>If nx or ny is NaN, return undefined.</li>
+        <li>If nx is -∞𝔽 or ny is +∞𝔽, return true.</li>
+        <li>If nx is +∞𝔽 or ny is -∞𝔽, return false.</li>
+        <li>If <a href="https://tc39.es/ecma262/#ℝ">ℝ</a>(nx) &lt; <a href="https://tc39.es/ecma262/#ℝ">ℝ</a>(ny), return true; otherwise return false.</li>
+      </ol>
+    </li>
+  </ol>
+</blockquote>
+
+<p>前面对于null都不满足，于是走到了第4步else，4.4 nx be !ToNumeric(px)，得到0，于是，0 &lt;= 0是true，但是0 &lt; 0是false，这就是为什么null &lt;= 0但是不null &lt; 0了。</p>
+
+<p>那么为什么null == 0是false呢，因为==和&lt;=在ECMA中走的flow不同，==执行Abstract Equality Comparison，其rule对应如下</p>
+
+<ul>
+  <li>对Abstract Equality Comparison</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is the same as <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y), then
+      <ol>
+        <li>Return the result of performing <a href="https://tc39.es/ecma262/#sec-strict-equality-comparison">Strict Equality Comparison</a> x === y.</li>
+      </ol>
+    </li>
+    <li>If x is null and y is undefined, return true.</li>
+    <li>If x is undefined and y is null, return true.</li>
+    <li>NOTE: This step is replaced in section <a href="https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec">B.3.7.2</a>.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is Number and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is String, return the result of the comparison x == ! <a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a>(y).</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is String and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is Number, return the result of the comparison ! <a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a>(x) == y.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (x) is BigInt and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (y) is String, then
+      <ol>
+        <li>Let n be ! <a href="https://tc39.es/ecma262/#sec-stringtobigint">StringToBigInt</a>(y).</li>
+        <li>If n is NaN, return false.</li>
+        <li>Return the result of the comparison x == n.</li>
+      </ol>
+    </li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is String and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is BigInt, return the result of the comparison y == x.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is Boolean, return the result of the comparison ! <a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a>(x) == y.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is Boolean, return the result of the comparison x == ! <a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a>(y).</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is either String, Number, BigInt, or Symbol and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is Object, return the result of the comparison x == ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(y).</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(x) is Object and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a>(y) is either String, Number, BigInt, or Symbol, return the result of the comparison ? <a href="https://tc39.es/ecma262/#sec-toprimitive">ToPrimitive</a>(x) == y.</li>
+    <li>If <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (x) is BigInt and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (y) is Number, or if <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (x) is Number and <a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a> (y) is BigInt, then
+      <ol>
+        <li>If x or y are any of NaN, +∞𝔽, or -∞𝔽, return false.</li>
+        <li>If <a href="https://tc39.es/ecma262/#ℝ">ℝ</a>(x) = <a href="https://tc39.es/ecma262/#ℝ">ℝ</a>(y), return true; otherwise return false.</li>
+      </ol>
+    </li>
+    <li>Return false.</li>
+  </ol>
+</blockquote>
+
+<p>可以看到，对于<code class="language-plaintext highlighter-rouge">null == 0</code>的比较，没有满足的条件可以找到，所以到14返回false。</p>
+
+<p>类似的，这里还有一个tricky的情况，就是</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[]</span> <span class="o">==</span> <span class="kc">true</span> <span class="c1">// false</span>
+<span class="p">[]</span> <span class="o">==</span> <span class="dl">''</span> <span class="c1">// true</span>
+<span class="o">!!</span><span class="p">[]</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>因为==操作对[]采取第12条，所以ToPrimitive(x)就变成了’‘，从而不等于true，然而当直接判断!![]或者if([])这样的操作时，采用的是ToBoolean，其rule对应如下</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Argument Type</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Undefined</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>Null</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>Boolean</td>
+      <td>return argument</td>
+    </tr>
+    <tr>
+      <td>Number</td>
+      <td>if argument is +0<sub>𝔽</sub>, -0<sub>𝔽</sub>, NaN, return false; otherwise return true</td>
+    </tr>
+    <tr>
+      <td>String</td>
+      <td>if argument is the empty String, return false; otherwise return true</td>
+    </tr>
+    <tr>
+      <td>Symbol</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>BigInt</td>
+      <td>if argument is 0, return false; otherwise return true</td>
+    </tr>
+    <tr>
+      <td>Object</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>于是乎!![]就变成了true，因为它是object</p>
+
+<h2 id="三词法作用域">三、词法作用域</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myName</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">myName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">老袁</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">bar</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">myName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">京城一灯</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>对于bar里面的myName，只会向上查找变量，因此myName有变量提升，相当于在bar上面有一个</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myName</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>而并不会查找foo里面的myName，那不在bar函数的上方，因此如果倒数第二行的myName被注释掉会直接报错，从而结果也理所应当的是<code class="language-plaintext highlighter-rouge">京城一灯</code></p>
+
+<h2 id="四gc">四、GC</h2>
+
+<ul>
+  <li>浏览器什么时候会GC，即便是给引用赋值为null，也不会立马执行GC，对象仍然存在于内存空间中</li>
+  <li>而且使用闭包应当注意，因为一旦使用闭包，就会造成类似的问题，闭包的数据无法被回收，造成内存泄漏</li>
+  <li>对于eval()函数更甚，使用eval的地方就会形成闭包，因为eval里万一有需要使用的变量，宿主环境是无法负责的，因此只能给你闭包起来保证变量在这，所以使用eval要小心</li>
+  <li>即便你要使用eval，使用window.eval()可以避免内存泄漏问题，因为这个命令就是让eval到全局window去查找需要的变量</li>
+  <li><code class="language-plaintext highlighter-rouge">with</code>，遇到with里的变量，放弃所有GC，并且将变量丢到全局</li>
+  <li>try catch中的catch(e)，e也会造成内存泄漏</li>
+</ul>
+
+<h2 id="五function">五、Function</h2>
+
+<p>下面这段代码</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">outside</span><span class="dl">'</span>
+<span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">inside</span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">fn1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">));</span>
+    <span class="kd">var</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="dl">'</span><span class="s1">console.log(a)</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">fn1</span><span class="p">();</span> <span class="c1">// inside</span>
+<span class="nx">fn2</span><span class="p">();</span> <span class="c1">// outside</span>
+</code></pre></div></div>
+
+<p>因为Function在遇到string的时候，是在全局作用域查找变量的</p>
+
+<h2 id="六js真的万物皆对象吗">六、JS真的万物皆对象吗？</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typeof</span> <span class="nb">String</span> <span class="c1">// function</span>
+</code></pre></div></div>
+
+<p>JavaScript中有一些内部未暴露的对象，并不是Object</p>
+
+<p>对于下面的原型链对象</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">o</span><span class="dl">'</span><span class="p">;</span>
+<span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 'f'</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">Person</span><span class="p">().</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 'o'</span>
+<span class="mi">1</span><span class="p">..</span><span class="nx">a</span> <span class="c1">// 'o'</span>
+</code></pre></div></div>
+
+<p>new出来的对象o1，o1的原型链是Person，Person的原型链是Object，从而找到了a为<code class="language-plaintext highlighter-rouge">o</code>，</p>
+
+<p>而直接使用Person，其原型链是Function，所以找到了<code class="language-plaintext highlighter-rouge">f</code>，另外Function再网上找的话，原型链也是Object</p>
+
+<p>1..a结果是<code class="language-plaintext highlighter-rouge">o</code>是因为1.是合法的，JS里的Number都是浮点数，所以1.0和1.是一样的</p>
+
+<h2 id="七meta-programming">七、Meta Programming</h2>
+
+<p>类似修改valueOf，toString的一些底层方法，从而增强当前对象的功能</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">:</span><span class="mi">3</span><span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">ks</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">next</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="na">value</span><span class="p">:</span> <span class="nx">o</span><span class="p">[</span><span class="nx">kx</span><span class="p">[</span><span class="nx">idx</span><span class="p">]],</span>
+                    <span class="na">done</span><span class="p">:</span> <span class="nx">idx</span> <span class="o">&gt;</span> <span class="nx">ks</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">v</span> <span class="k">of</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span> <span class="c1">// done</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>通过元编程就可以解决这个问题</p>
+
+<p>另外，甚至可以改变toPrimitive等Symbol的Func，如</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">yideng</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">toPrimitive</span><span class="p">]:</span> <span class="p">((</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="o">++</span><span class="nx">i</span><span class="p">;)(</span><span class="mi">0</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">((</span><span class="nx">yideng</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">yideng</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">yideng</span> <span class="o">==</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">success here</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// done</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>还有几点跟元编程相关</p>
+
+<ul>
+  <li>TCO尾递归优化，可以通过TCO_ENABLE=true打开（hosting支持的话）</li>
+  <li>Reflect也是基于元编程实现，例如npm库reflect-metadata，做IOC会用到</li>
+</ul>
+
+<h2 id="八协程">八、协程</h2>
+
+<ul>
+  <li>async，await是microtask，不是macrotask，但是会保存变量，类似闭包，保存await的环境</li>
+  <li>await就是Promise.then</li>
+  <li>JS是单线程执行，但是V8有多个线程辅助，</li>
+</ul>
+
+<h2 id="九js实现多线程">九、JS实现多线程</h2>
+
+<ul>
+  <li>Concurrent.Thread.js (Web Worker不灵的时候，可以临时替代)</li>
+  <li>web worker</li>
+  <li>现在基本都用原子锁了</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/" data-toggle="tooltip" data-placement="top" title="函数式编程与JS">
+                        Previous<br>
+                        <span>函数式编程与JS</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/" data-toggle="tooltip" data-placement="top" title="NodeJS原理及大规模部署">
+                        Next<br>
+                        <span>NodeJS原理及大规模部署</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '7c5c1f80bdd0759e4074',
+                    clientSecret: '469697e2f0adba5afda75dc10d3fe5dcab3883de',
+                    repo: 'pfan8.github.io',
+                    owner: 'pfan8',
+                    admin: ['pfan8'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#面试" title="面试" rel="2">
+                                    面试
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="2">
+                                    Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工作" title="工作" rel="2">
+                                    工作
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PEP" title="PEP" rel="2">
+                                    PEP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="5">
+                                    Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#规范" title="规范" rel="3">
+                                    规范
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Jupyter Notebook" title="Jupyter Notebook" rel="1">
+                                    Jupyter Notebook
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#小象学院" title="小象学院" rel="1">
+                                    小象学院
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#NLP" title="NLP" rel="2">
+                                    NLP
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#模型" title="模型" rel="1">
+                                    模型
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SOTA" title="SOTA" rel="1">
+                                    SOTA
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#算法" title="算法" rel="10">
+                                    算法
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#LSTM" title="LSTM" rel="1">
+                                    LSTM
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#深度学习" title="深度学习" rel="1">
+                                    深度学习
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#梯度" title="梯度" rel="1">
+                                    梯度
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#排序" title="排序" rel="1">
+                                    排序
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#总结" title="总结" rel="3">
+                                    总结
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#贪心" title="贪心" rel="1">
+                                    贪心
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#动态规划" title="动态规划" rel="2">
+                                    动态规划
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#数据结构" title="数据结构" rel="1">
+                                    数据结构
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#堆" title="堆" rel="1">
+                                    堆
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#栈" title="栈" rel="1">
+                                    栈
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#背包问题" title="背包问题" rel="1">
+                                    背包问题
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#C++" title="C++" rel="1">
+                                    C++
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#STL" title="STL" rel="1">
+                                    STL
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#位运算" title="位运算" rel="2">
+                                    位运算
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#double pointer" title="double pointer" rel="1">
+                                    double pointer
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#快慢指针" title="快慢指针" rel="1">
+                                    快慢指针
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#链表" title="链表" rel="1">
+                                    链表
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#cpython" title="cpython" rel="1">
+                                    cpython
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#字符串匹配" title="字符串匹配" rel="1">
+                                    字符串匹配
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#github" title="github" rel="1">
+                                    github
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ssh" title="ssh" rel="1">
+                                    ssh
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#安全" title="安全" rel="1">
+                                    安全
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#css" title="css" rel="1">
+                                    css
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#layout" title="layout" rel="1">
+                                    layout
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#responsive" title="responsive" rel="1">
+                                    responsive
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#life" title="life" rel="1">
+                                    life
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#film" title="film" rel="1">
+                                    film
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="4">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#functional programming" title="functional programming" rel="1">
+                                    functional programming
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#工具" title="工具" rel="1">
+                                    工具
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://zhengwuyang.com">WY</a></li>
+                    
+                        <li><a href="http://www.jianshu.com/u/e71990ada2fd">简书·BY</a></li>
+                    
+                        <li><a href="https://apple.com">Apple</a></li>
+                    
+                        <li><a href="https://developer.apple.com/">Apple Developer</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

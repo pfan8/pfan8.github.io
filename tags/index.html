@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The safest way to try and get what you want, is to try and deserve what you want">
+    <meta name="keywords"  content="PF, PF Blog, 炮饭的博客, pfan8, 科技玮, IT, AI, 随笔">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Tags - 炮饭的博客 | PF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://pfan8.github.io/tags/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">冬のBlog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/index.html">冬のBlog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/2/index.html">冬のBlog - page 2</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/page/3/index.html">冬のBlog - page 3</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading" id="tag-heading">
+                    <h1>Tags</h1>
+                    <span class="subheading">keep hungry keep foolish</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 标签云 -->
+			<div id='tag_cloud' class="tags">
+				
+				<a href="#面试" title="面试" rel="2">面试</a>
+				
+				<a href="#Machine Learning" title="Machine Learning" rel="2">Machine Learning</a>
+				
+				<a href="#工作" title="工作" rel="2">工作</a>
+				
+				<a href="#PEP" title="PEP" rel="2">PEP</a>
+				
+				<a href="#Python" title="Python" rel="5">Python</a>
+				
+				<a href="#规范" title="规范" rel="3">规范</a>
+				
+				<a href="#Jupyter Notebook" title="Jupyter Notebook" rel="1">Jupyter Notebook</a>
+				
+				<a href="#小象学院" title="小象学院" rel="1">小象学院</a>
+				
+				<a href="#NLP" title="NLP" rel="2">NLP</a>
+				
+				<a href="#模型" title="模型" rel="1">模型</a>
+				
+				<a href="#SOTA" title="SOTA" rel="1">SOTA</a>
+				
+				<a href="#IT" title="IT" rel="2">IT</a>
+				
+				<a href="#算法" title="算法" rel="10">算法</a>
+				
+				<a href="#LSTM" title="LSTM" rel="1">LSTM</a>
+				
+				<a href="#深度学习" title="深度学习" rel="1">深度学习</a>
+				
+				<a href="#梯度" title="梯度" rel="1">梯度</a>
+				
+				<a href="#排序" title="排序" rel="1">排序</a>
+				
+				<a href="#总结" title="总结" rel="3">总结</a>
+				
+				<a href="#贪心" title="贪心" rel="1">贪心</a>
+				
+				<a href="#动态规划" title="动态规划" rel="2">动态规划</a>
+				
+				<a href="#数据结构" title="数据结构" rel="1">数据结构</a>
+				
+				<a href="#堆" title="堆" rel="1">堆</a>
+				
+				<a href="#栈" title="栈" rel="1">栈</a>
+				
+				<a href="#背包问题" title="背包问题" rel="1">背包问题</a>
+				
+				<a href="#C++" title="C++" rel="1">C++</a>
+				
+				<a href="#STL" title="STL" rel="1">STL</a>
+				
+				<a href="#位运算" title="位运算" rel="2">位运算</a>
+				
+				<a href="#double pointer" title="double pointer" rel="1">double pointer</a>
+				
+				<a href="#快慢指针" title="快慢指针" rel="1">快慢指针</a>
+				
+				<a href="#链表" title="链表" rel="1">链表</a>
+				
+				<a href="#cpython" title="cpython" rel="1">cpython</a>
+				
+				<a href="#字符串匹配" title="字符串匹配" rel="1">字符串匹配</a>
+				
+				<a href="#github" title="github" rel="1">github</a>
+				
+				<a href="#ssh" title="ssh" rel="1">ssh</a>
+				
+				<a href="#安全" title="安全" rel="1">安全</a>
+				
+				<a href="#git" title="git" rel="1">git</a>
+				
+				<a href="#css" title="css" rel="1">css</a>
+				
+				<a href="#layout" title="layout" rel="1">layout</a>
+				
+				<a href="#responsive" title="responsive" rel="1">responsive</a>
+				
+				<a href="#life" title="life" rel="1">life</a>
+				
+				<a href="#film" title="film" rel="1">film</a>
+				
+				<a href="#javascript" title="javascript" rel="4">javascript</a>
+				
+				<a href="#functional programming" title="functional programming" rel="1">functional programming</a>
+				
+				<a href="#nodejs" title="nodejs" rel="1">nodejs</a>
+				
+				<a href="#工具" title="工具" rel="1">工具</a>
+				
+			</div>
+
+            <!--<blockquote class="tag-comments">
+                标签命名规范：
+                    <li>行业观察、职位、公司优先使用中文</li>
+                    <li>外国产品、术语优先使用英文</li>
+            </blockquote>-->
+
+            <!-- 标签列表 -->
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="面试">
+                    <span class="tag-text">面试</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-15">2019-07-15</time>
+				  <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" title="面试总结（持续更新）">面试总结（持续更新）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
+				        <h2 class="post-title">
+                            面试总结（持续更新）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            沈瑞医疗
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-15</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-06-29">2019-06-29</time>
+				  <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" title="【牛客网】18年滴滴笔试题总结">【牛客网】18年滴滴笔试题总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            【牛客网】18年滴滴笔试题总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            First Blog！
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-06-29</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Machine Learning">
+                    <span class="tag-text">Machine Learning</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-15">2019-07-15</time>
+				  <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" title="面试总结（持续更新）">面试总结（持续更新）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
+				        <h2 class="post-title">
+                            面试总结（持续更新）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            沈瑞医疗
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-15</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-06-29">2019-06-29</time>
+				  <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" title="【牛客网】18年滴滴笔试题总结">【牛客网】18年滴滴笔试题总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            【牛客网】18年滴滴笔试题总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            First Blog！
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-06-29</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="工作">
+                    <span class="tag-text">工作</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-15">2019-07-15</time>
+				  <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" title="面试总结（持续更新）">面试总结（持续更新）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
+				        <h2 class="post-title">
+                            面试总结（持续更新）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            沈瑞医疗
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-15</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-06-29">2019-06-29</time>
+				  <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" title="【牛客网】18年滴滴笔试题总结">【牛客网】18年滴滴笔试题总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/06/29/%E7%AC%94%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            【牛客网】18年滴滴笔试题总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            First Blog！
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-06-29</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="PEP">
+                    <span class="tag-text">PEP</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/" title="PEP简介">PEP简介</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/">
+				        <h2 class="post-title">
+                            PEP简介
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Python Code Standard
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" title="PEP-08 Python代码规范">PEP-08 Python代码规范</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+				        <h2 class="post-title">
+                            PEP-08 Python代码规范
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            PEP 8 -- Style Guide for Python Code
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Python">
+                    <span class="tag-text">Python</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-05-04">2020-05-04</time>
+				  <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/" title="Python源码探究">Python源码探究</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/">
+				        <h2 class="post-title">
+                            Python源码探究
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            以str.find为例
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-05-04</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/" title="编程常用缩写">编程常用缩写</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/">
+				        <h2 class="post-title">
+                            编程常用缩写
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            所有语言通用的命名规范
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/" title="Python知识点总结（包含部分Jupyter Notebook）">Python知识点总结（包含部分Jupyter Notebook）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/">
+				        <h2 class="post-title">
+                            Python知识点总结（包含部分Jupyter Notebook）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            小象学院-AI校招课程
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/" title="PEP简介">PEP简介</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/">
+				        <h2 class="post-title">
+                            PEP简介
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Python Code Standard
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" title="PEP-08 Python代码规范">PEP-08 Python代码规范</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+				        <h2 class="post-title">
+                            PEP-08 Python代码规范
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            PEP 8 -- Style Guide for Python Code
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="规范">
+                    <span class="tag-text">规范</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/" title="编程常用缩写">编程常用缩写</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/">
+				        <h2 class="post-title">
+                            编程常用缩写
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            所有语言通用的命名规范
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/" title="PEP简介">PEP简介</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP%E4%BB%8B%E7%BB%8D/">
+				        <h2 class="post-title">
+                            PEP简介
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Python Code Standard
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-01">2019-07-01</time>
+				  <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" title="PEP-08 Python代码规范">PEP-08 Python代码规范</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/01/PEP8-Python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+				        <h2 class="post-title">
+                            PEP-08 Python代码规范
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            PEP 8 -- Style Guide for Python Code
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Jupyter Notebook">
+                    <span class="tag-text">Jupyter Notebook</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/" title="Python知识点总结（包含部分Jupyter Notebook）">Python知识点总结（包含部分Jupyter Notebook）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/">
+				        <h2 class="post-title">
+                            Python知识点总结（包含部分Jupyter Notebook）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            小象学院-AI校招课程
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="小象学院">
+                    <span class="tag-text">小象学院</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/" title="Python知识点总结（包含部分Jupyter Notebook）">Python知识点总结（包含部分Jupyter Notebook）</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/Python%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E5%8C%85%E5%90%AB%E9%83%A8%E5%88%86Jupyter-Notebook/">
+				        <h2 class="post-title">
+                            Python知识点总结（包含部分Jupyter Notebook）
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            小象学院-AI校招课程
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="NLP">
+                    <span class="tag-text">NLP</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-07">2019-07-07</time>
+				  <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/" title="手撕LSTM梯度">手撕LSTM梯度</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/">
+				        <h2 class="post-title">
+                            手撕LSTM梯度
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            梯度更新推导
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-07</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/" title="XLNet总结">XLNet总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            XLNet总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Attention Mask部分的个人理解
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="模型">
+                    <span class="tag-text">模型</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/" title="XLNet总结">XLNet总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            XLNet总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Attention Mask部分的个人理解
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="SOTA">
+                    <span class="tag-text">SOTA</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/" title="XLNet总结">XLNet总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/XLNet%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            XLNet总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            Attention Mask部分的个人理解
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="IT">
+                    <span class="tag-text">IT</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-03">2019-07-03</time>
+				  <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%80%BB%E7%BB%93/" title="算法复杂度简介">算法复杂度简介</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法复杂度简介
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            时间复杂度，空间复杂度，大O表示法
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-03</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-02">2019-07-02</time>
+				  <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/" title="编程常用缩写">编程常用缩写</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/02/%E7%BC%96%E7%A8%8B%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99/">
+				        <h2 class="post-title">
+                            编程常用缩写
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            所有语言通用的命名规范
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-02</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="算法">
+                    <span class="tag-text">算法</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-05-19">2020-05-19</time>
+				  <a href="/2020/05/19/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/" title="剑指offer总结">剑指offer总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/05/19/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            剑指offer总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            66题解法思路
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-05-19</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-29">2019-07-29</time>
+				  <a href="/2019/07/29/cin-cout-VS-scanf-printf/" title="cin cout VS scanf printf">cin cout VS scanf printf</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/29/cin-cout-VS-scanf-printf/">
+				        <h2 class="post-title">
+                            cin cout VS scanf printf
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++输入输出流效率
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-29</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/" title="双指针总结">双指针总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            双指针总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            链表问题、快慢指针
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/" title="位运算总结">位运算总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            位运算总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            与、异或、位运算题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-24">2019-07-24</time>
+				  <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/" title="STL总结">STL总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            STL总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++常用容器API整理
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-24</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-23">2019-07-23</time>
+				  <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" title="背包九讲">背包九讲</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/">
+				        <h2 class="post-title">
+                            背包九讲
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            动态规划经典系列
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-23</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-21">2019-07-21</time>
+				  <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/" title="堆栈总结">堆栈总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            堆栈总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++，Python类库以及经典题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-21</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-20">2019-07-20</time>
+				  <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/" title="算法策略总结">算法策略总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法策略总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            算法思想汇总
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-20</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-09">2019-07-09</time>
+				  <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" title="排序算法总结">排序算法总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            排序算法总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            经典排序算法时间、空间复杂度、思想、实现等
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-09</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-03">2019-07-03</time>
+				  <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%80%BB%E7%BB%93/" title="算法复杂度简介">算法复杂度简介</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法复杂度简介
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            时间复杂度，空间复杂度，大O表示法
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-03</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="LSTM">
+                    <span class="tag-text">LSTM</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-07">2019-07-07</time>
+				  <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/" title="手撕LSTM梯度">手撕LSTM梯度</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/">
+				        <h2 class="post-title">
+                            手撕LSTM梯度
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            梯度更新推导
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-07</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="深度学习">
+                    <span class="tag-text">深度学习</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-07">2019-07-07</time>
+				  <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/" title="手撕LSTM梯度">手撕LSTM梯度</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/">
+				        <h2 class="post-title">
+                            手撕LSTM梯度
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            梯度更新推导
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-07</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="梯度">
+                    <span class="tag-text">梯度</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-07">2019-07-07</time>
+				  <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/" title="手撕LSTM梯度">手撕LSTM梯度</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/07/%E6%89%8B%E6%92%95LSTM%E6%A2%AF%E5%BA%A6/">
+				        <h2 class="post-title">
+                            手撕LSTM梯度
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            梯度更新推导
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-07</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="排序">
+                    <span class="tag-text">排序</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-09">2019-07-09</time>
+				  <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" title="排序算法总结">排序算法总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            排序算法总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            经典排序算法时间、空间复杂度、思想、实现等
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-09</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="总结">
+                    <span class="tag-text">总结</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-21">2019-07-21</time>
+				  <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/" title="堆栈总结">堆栈总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            堆栈总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++，Python类库以及经典题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-21</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-20">2019-07-20</time>
+				  <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/" title="算法策略总结">算法策略总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法策略总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            算法思想汇总
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-20</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-09">2019-07-09</time>
+				  <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" title="排序算法总结">排序算法总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/09/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            排序算法总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            经典排序算法时间、空间复杂度、思想、实现等
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-09</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="贪心">
+                    <span class="tag-text">贪心</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-20">2019-07-20</time>
+				  <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/" title="算法策略总结">算法策略总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法策略总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            算法思想汇总
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-20</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="动态规划">
+                    <span class="tag-text">动态规划</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-23">2019-07-23</time>
+				  <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" title="背包九讲">背包九讲</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/">
+				        <h2 class="post-title">
+                            背包九讲
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            动态规划经典系列
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-23</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-20">2019-07-20</time>
+				  <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/" title="算法策略总结">算法策略总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/20/%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            算法策略总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            算法思想汇总
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-20</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="数据结构">
+                    <span class="tag-text">数据结构</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-21">2019-07-21</time>
+				  <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/" title="堆栈总结">堆栈总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            堆栈总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++，Python类库以及经典题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="堆">
+                    <span class="tag-text">堆</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-21">2019-07-21</time>
+				  <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/" title="堆栈总结">堆栈总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            堆栈总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++，Python类库以及经典题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="栈">
+                    <span class="tag-text">栈</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-21">2019-07-21</time>
+				  <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/" title="堆栈总结">堆栈总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/21/%E5%A0%86%E6%A0%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            堆栈总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++，Python类库以及经典题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="背包问题">
+                    <span class="tag-text">背包问题</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-23">2019-07-23</time>
+				  <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" title="背包九讲">背包九讲</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/23/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/">
+				        <h2 class="post-title">
+                            背包九讲
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            动态规划经典系列
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-23</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="C++">
+                    <span class="tag-text">C++</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-24">2019-07-24</time>
+				  <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/" title="STL总结">STL总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            STL总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++常用容器API整理
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-24</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="STL">
+                    <span class="tag-text">STL</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-24">2019-07-24</time>
+				  <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/" title="STL总结">STL总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/24/STL%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            STL总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++常用容器API整理
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-24</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="位运算">
+                    <span class="tag-text">位运算</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-29">2019-07-29</time>
+				  <a href="/2019/07/29/cin-cout-VS-scanf-printf/" title="cin cout VS scanf printf">cin cout VS scanf printf</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/29/cin-cout-VS-scanf-printf/">
+				        <h2 class="post-title">
+                            cin cout VS scanf printf
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            C++输入输出流效率
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-29</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/" title="位运算总结">位运算总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            位运算总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            与、异或、位运算题目
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="double pointer">
+                    <span class="tag-text">double pointer</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/" title="双指针总结">双指针总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            双指针总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            链表问题、快慢指针
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="快慢指针">
+                    <span class="tag-text">快慢指针</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/" title="双指针总结">双指针总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            双指针总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            链表问题、快慢指针
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="链表">
+                    <span class="tag-text">链表</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-07-25">2019-07-25</time>
+				  <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/" title="双指针总结">双指针总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/07/25/%E5%8F%8C%E6%8C%87%E9%92%88%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            双指针总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            链表问题、快慢指针
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-07-25</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="cpython">
+                    <span class="tag-text">cpython</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-05-04">2020-05-04</time>
+				  <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/" title="Python源码探究">Python源码探究</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/">
+				        <h2 class="post-title">
+                            Python源码探究
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            以str.find为例
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-05-04</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="字符串匹配">
+                    <span class="tag-text">字符串匹配</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-05-04">2020-05-04</time>
+				  <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/" title="Python源码探究">Python源码探究</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/05/04/python%E6%BA%90%E7%A0%81%E6%8E%A2%E7%A9%B6/">
+				        <h2 class="post-title">
+                            Python源码探究
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            以str.find为例
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-05-04</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="github">
+                    <span class="tag-text">github</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-06-21">2020-06-21</time>
+				  <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/" title="Github SSH配置">Github SSH配置</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/">
+				        <h2 class="post-title">
+                            Github SSH配置
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            安全便捷的git环境
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-06-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="ssh">
+                    <span class="tag-text">ssh</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-06-21">2020-06-21</time>
+				  <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/" title="Github SSH配置">Github SSH配置</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/">
+				        <h2 class="post-title">
+                            Github SSH配置
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            安全便捷的git环境
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-06-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="安全">
+                    <span class="tag-text">安全</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-06-21">2020-06-21</time>
+				  <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/" title="Github SSH配置">Github SSH配置</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/">
+				        <h2 class="post-title">
+                            Github SSH配置
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            安全便捷的git环境
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-06-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="git">
+                    <span class="tag-text">git</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-07-16">2020-07-16</time>
+				  <a href="/2020/07/16/git-merge-&-rebase-&-cherry-pick/" title="Git Work Flow">Git Work Flow</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/07/16/git-merge-&-rebase-&-cherry-pick/">
+				        <h2 class="post-title">
+                            Git Work Flow
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            something you need to know for teamwork
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-07-16</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="css">
+                    <span class="tag-text">css</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-07-21">2020-07-21</time>
+				  <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/" title="CSS Position & CSS3 Display 总结">CSS Position & CSS3 Display 总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            CSS Position & CSS3 Display 总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            css布局样式
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="layout">
+                    <span class="tag-text">layout</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-07-21">2020-07-21</time>
+				  <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/" title="CSS Position & CSS3 Display 总结">CSS Position & CSS3 Display 总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            CSS Position & CSS3 Display 总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            css布局样式
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="responsive">
+                    <span class="tag-text">responsive</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-07-21">2020-07-21</time>
+				  <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/" title="CSS Position & CSS3 Display 总结">CSS Position & CSS3 Display 总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/07/21/CSS&CSS3%E4%BD%8D%E7%BD%AE%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            CSS Position & CSS3 Display 总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            css布局样式
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-07-21</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="life">
+                    <span class="tag-text">life</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-10-01">2020-10-01</time>
+				  <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/" title="《夺冠》- Film reviews">《夺冠》- Film reviews</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/">
+				        <h2 class="post-title">
+                            《夺冠》- Film reviews
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            观影有感
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-10-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="film">
+                    <span class="tag-text">film</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-10-01">2020-10-01</time>
+				  <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/" title="《夺冠》- Film reviews">《夺冠》- Film reviews</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/10/01/%E5%A4%BA%E5%86%A0-File-reviews/">
+				        <h2 class="post-title">
+                            《夺冠》- Film reviews
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            观影有感
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-10-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="javascript">
+                    <span class="tag-text">javascript</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-11-17">2020-11-17</time>
+				  <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/" title="NodeJS原理及大规模部署">NodeJS原理及大规模部署</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/">
+				        <h2 class="post-title">
+                            NodeJS原理及大规模部署
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结4
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-11-17</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-11-15">2020-11-15</time>
+				  <a href="/2020/11/15/I-Don't-Know-About-JS/" title="I Don't Know About JS">I Don't Know About JS</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/11/15/I-Don't-Know-About-JS/">
+				        <h2 class="post-title">
+                            I Don't Know About JS
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结3
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-11-15</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-10-25">2020-10-25</time>
+				  <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/" title="函数式编程与JS">函数式编程与JS</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/">
+				        <h2 class="post-title">
+                            函数式编程与JS
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结2
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-10-25</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-10-20">2020-10-20</time>
+				  <a href="/2020/10/20/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" title="JavaScript基础知识点总结">JavaScript基础知识点总结</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/10/20/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
+				        <h2 class="post-title">
+                            JavaScript基础知识点总结
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-10-20</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="functional programming">
+                    <span class="tag-text">functional programming</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-10-25">2020-10-25</time>
+				  <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/" title="函数式编程与JS">函数式编程与JS</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/10/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8EJS/">
+				        <h2 class="post-title">
+                            函数式编程与JS
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结2
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-10-25</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="nodejs">
+                    <span class="tag-text">nodejs</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-11-17">2020-11-17</time>
+				  <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/" title="NodeJS原理及大规模部署">NodeJS原理及大规模部署</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/11/17/NodeJS%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%83%A8%E7%BD%B2/">
+				        <h2 class="post-title">
+                            NodeJS原理及大规模部署
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            老袁の相声总结4
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-11-17</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="工具">
+                    <span class="tag-text">工具</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-11-20">2020-11-20</time>
+				  <a href="/2020/11/20/iTerm2%E9%85%8D%E7%BD%AE/" title="iTerm2配置">iTerm2配置</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/11/20/iTerm2%E9%85%8D%E7%BD%AE/">
+				        <h2 class="post-title">
+                            iTerm2配置
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            如何愉悦地coding以及ZB
+				        </h3>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-11-20</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                            <li>
+                                <a target="_blank" href="https://www.jianshu.com/u/e71990ada2fd">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
+                                    </span>
+                                </a>
+                            </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/pfan8">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 冬のBlog 2020
+                    <br>
+                    Theme on <a href="https://github.com/pfan8/pfan8.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=pfan8&repo=pfan8.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- TOC -->
+<script src="/js/toc.js "></script>
+
+<!--start TOC -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+}); 
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90855596-1';
+    var _gaDomain = 'qiubaiying.top';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'b50bf2b12b5338a1845e33832976fd68';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
