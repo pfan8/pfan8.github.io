@@ -3,6 +3,7 @@ layout:     post   				    # 使用的布局（不需要改）
 title:      Python知识点总结（包含部分Jupyter Notebook）	# 标题 
 subtitle:   小象学院-AI校招课程		 #副标题
 date:       2019-07-02 				# 时间
+update_date:       2019-07-02 				# 时间
 author:     pfan8 						# 作者
 header-img: img/post-bg-e2e-ux.jpg	#这篇文章标题背景图片
 catalog: true 						# 是否归档

@@ -1,5 +1,7 @@
 ---
 layout: page
+pagination: 
+  enabled: true
 description: "冬が访れて 春がまだ远いですか"
 ---
 <!-- description: "秋の収穫は平日の蓄積に依存します" -->
@@ -22,7 +24,7 @@ description: "冬が访れて 春がまだ远いですか"
     <p class="post-meta">
         Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} | created on {{ post.date | date: "%B %-d, %Y" }} 
         {% if post.update_date %}
-        | updated on {{ post.update_date | update_date: "%B %-d, %Y" }}
+        | updated on {{ post.update_date | date: "%B %-d, %Y" }}
         {% endif %}
     </p>
 </div>
