@@ -4,7 +4,7 @@ env:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 install: 
   - gem install jekyll
-  - gem install jekyll-paginate
+  - gem install jekyll-paginate-v2
 script: 
   - jekyll build
 after_success:
