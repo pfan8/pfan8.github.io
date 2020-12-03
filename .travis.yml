@@ -7,8 +7,6 @@ before_script:
 script: ./script/cibuild
 exclude: [vendor]
 sudo: false
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 
 # deploy:
 #   provider: pages

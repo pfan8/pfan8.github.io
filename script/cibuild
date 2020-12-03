@@ -11,18 +11,18 @@ set -e
 
 # cleanup "_site"
 rm -rf _site
-mkdir _site
+# mkdir _site
 
-# clone remote repo to "_site"
-git clone https://${GITHUB_TOKEN}@github.com/pfan8/pfan8.github.io.git --branch gh-pages _site
+# # clone remote repo to "_site"
+# git clone https://${GITHUB_TOKEN}@github.com/pfan8/pfan8.github.io.git --branch gh-pages _site
 
-# build with Jekyll into "_site"
-bundle exec jekyll build
+# # build with Jekyll into "_site"
+# bundle exec jekyll build
 
-# push
-cd _site
-git config user.email "fqwgc8@outlook.com"
-git config user.name "Kun Hades"
-git add --all
-git commit -a -m "Travis #$TRAVIS_BUILD_NUMBER"
-git push --force origin gh-pages
+# # push
+# cd _site
+# git config user.email "fqwgc8@outlook.com"
+# git config user.name "Kun Hades"
+# git add --all
+# git commit -a -m "Travis #$TRAVIS_BUILD_NUMBER"
+# git push --force origin gh-pages
