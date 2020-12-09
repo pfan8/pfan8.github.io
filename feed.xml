@@ -5,8 +5,8 @@
     <description>The safest way to try and get what you want, is to try and deserve what you want</description>
     <link>http://pfan8.github.io/</link>
     <atom:link href="http://pfan8.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 07 Dec 2020 11:31:10 +0000</pubDate>
-    <lastBuildDate>Mon, 07 Dec 2020 11:31:10 +0000</lastBuildDate>
+    <pubDate>Wed, 09 Dec 2020 09:43:28 +0000</pubDate>
+    <lastBuildDate>Wed, 09 Dec 2020 09:43:28 +0000</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -1884,6 +1884,9 @@ compose(f,g,h)
       &lt;li&gt;决定单个子元素在flex容器中的对齐方式&lt;/li&gt;
       &lt;li&gt;这个属性很常用，因为通常使用在css中的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;float&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clear&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vertical-align&lt;/code&gt;在flex的display中均无效&lt;/li&gt;
       &lt;li&gt;接受任何&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;align-items&lt;/code&gt;的值，并且会覆盖其值&lt;/li&gt;
+      &lt;li&gt;
+        &lt;font color=&quot;red&quot;&gt;有align-self调整元素自身的cross-axis对齐方式，但是没有justify-self，因为可以使用margin来控制main-axis对齐方式，例如`margin-right: auto`，元素会从右侧对齐&lt;/font&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
