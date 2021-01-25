@@ -5,8 +5,8 @@
     <description>The safest way to try and get what you want, is to try and deserve what you want</description>
     <link>http://pfan8.github.io/</link>
     <atom:link href="http://pfan8.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 25 Jan 2021 06:43:20 +0000</pubDate>
-    <lastBuildDate>Mon, 25 Jan 2021 06:43:20 +0000</lastBuildDate>
+    <pubDate>Mon, 25 Jan 2021 06:57:00 +0000</pubDate>
+    <lastBuildDate>Mon, 25 Jan 2021 06:57:00 +0000</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -16,7 +16,7 @@
 
 &lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
 &lt;p&gt;        给定一个无向图，如果它任意两个顶点都联通并且是一棵树，那么我们就称之为生成树(Spanning Tree)。如果是带权值的无向图，那么权值之和最小的生成树，我们就称之为最小生成树(MST, Minimum Spanning Tree)。
-  &lt;img src=&quot;https://img-blog.csdn.net/20150816104648262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot; /&gt;
+  &lt;img src=&quot;https://thumbsnap.com/i/7YGGuU9Q.png?0125&quot; alt=&quot;&quot; /&gt;
           我们由最小生成树的定义，可以延伸出一个修建道路的问题：把无向图的每个顶点看作村庄，计划修建道路使得可以在所有村庄之间通行。把每个村庄之间修建道路的费用看作权值，那么我们就可以得到一个求解修建道路的最小费用的问题。&lt;/p&gt;
 
 &lt;p&gt;        常见求解最小生成树的算法有Kruskal算法和Prim算法。由于篇幅问题再此对于Prim算法，就不多做解释了。现在我们看看Kruskal算法，是怎么来求解最小生成树的问题。&lt;/p&gt;
@@ -37,19 +37,19 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;我们用现在来模拟一下Kruskal算法，下面给出一个无向图B,我们使用Kruskal来找无向图B的最小生成树。
-  &lt;img src=&quot;https://img-blog.csdn.net/20150816105532486?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;img src=&quot;https://thumbsnap.com/i/BrTAHkab.jpg?0125&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;首先，我们将所有的边都进行从小到大的排序。排序之后根据贪心准则，我们选取最小边(A,D)。我们发现顶点A,D不在一棵树上，所以合并顶点A,D所在的树，并将边(A,D)加入边集E‘。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdn.net/20150816111905267?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://thumbsnap.com/i/mvNTew8Z.jpg?0125&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们接着在剩下的边中查找权值最小的边，于是我们找到的(C,E)。我们可以发现，顶点C,E仍然不在一棵树上，所以我们合并顶点C，E所在的树，并将边(C,E)加入边集E’&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdn.net/20150816112526131?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://thumbsnap.com/i/6S4Z1uey.jpg?0125&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;不断重复上述的过程，于是我们就找到了无向图B的最小生成树，如下图所示：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdn.net/20150816113249128?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://thumbsnap.com/i/QfdLcpui.jpg?0125&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;判断当边数量 == 节点数量-1 时，说明已经生成最小生成树&lt;/p&gt;
 
