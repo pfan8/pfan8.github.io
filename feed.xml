@@ -5,9 +5,150 @@
     <description>The safest way to try and get what you want, is to try and deserve what you want</description>
     <link>http://pfan8.github.io/</link>
     <atom:link href="http://pfan8.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 03 Mar 2021 12:13:00 +0000</pubDate>
-    <lastBuildDate>Wed, 03 Mar 2021 12:13:00 +0000</lastBuildDate>
+    <pubDate>Wed, 03 Mar 2021 12:25:06 +0000</pubDate>
+    <lastBuildDate>Wed, 03 Mar 2021 12:25:06 +0000</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Google OAuth2</title>
+        <description>&lt;h2 id=&quot;1-google-oauth&quot;&gt;1. Google OAuth&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Intro&lt;/strong&gt;: OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts on an HTTP service, such as Facebook, GitHub, and DigitalOcean. It works by delegating user authentication to the service that hosts the user account, and authorizing third-party applications to access the user account. OAuth 2 provides authorization flows for web and desktop applications, and mobile devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2&quot;&gt;more details for OAuth2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Simply put, if we want to use Google Account to login our application or connect gmail, we can use Google OAuth2 flow to verify the user, Google will handle the authentication flow and hand back the control to your application, togather with user’s google account infomations.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://developers.google.com/identity/protocols/oauth2/images/flows/implicit.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;for Nodejs, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;react-google-login&lt;/code&gt; lib is enough to use. But if you wanna enhance your system’s security, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;state&lt;/code&gt; param in Google OAuth2 api, however this param is not supported in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;react-google-login&lt;/code&gt;, besides, the formal Javascript Google api lib &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gapi&lt;/code&gt; doesn’t support it as well! so you need to call googleapis with axios/ajax by yourself. follow the formal doc of type &lt;a href=&quot;https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#oauth-2.0-endpoints&quot;&gt;OAuth 2.0 Endpoints&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-jwtsession&quot;&gt;2. JWT/Session&lt;/h2&gt;
+
+&lt;p&gt;for node application’s authentication, there’re mainly 2 modern solutions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html&quot;&gt;JWT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Store session in server DB (like express-session)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;the main difference for these 2 machanism is in this &lt;a href=&quot;https://stackoverflow.com/questions/43452896/authentication-jwt-usage-vs-session&quot;&gt;sof post&lt;/a&gt;, I concluded them as below:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;JWT store in client, so that low costing for server, boost the speed&lt;/li&gt;
+  &lt;li&gt;JWT may confront with XSS attact, Server-side sessions is safer&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;state-construct&quot;&gt;State Construct&lt;/h2&gt;
+
+&lt;p&gt;unlike JWT, we store the user session values in Backend-DB (sessions tbl), in order to meet the requirement, validate state during the whole oauth flow on both Frontend&amp;amp;Backend, we use sessionID to generate state value, build the state the value as below&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;in login page, if google-state not in localstorage, Frontend will call /loginWithGoogle with param {startOauth: true} ,  Backend will generate a “fake“ user (passport.js), thus initializing a new entry in sessions tbl, and return the sessionID as data in response.
+    &lt;ol&gt;
+      &lt;li&gt;for gmail connect, the browser should contain the google-state in localstorage already, otherwise it should be treated as invalid user.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Once Frontend receiving the sessionID, it generate state param using the sessionID with bcryptjs’s hash function, and store the sessionID with storageHelper into localstorage.&lt;/li&gt;
+  &lt;li&gt;Frontend hold the state value so it can directly validate the state value from Google OAuth response&lt;/li&gt;
+  &lt;li&gt;Backend will use bcrypt lib to compareSync the value between request sessionID and state_token passed from Frontend&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;flow&quot;&gt;Flow&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://thumbsnap.com/i/92rFej1X.jpg?0303&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;implement Google OAuth2 authorization as End point (https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow?hl=fr), deprecate the react-google-login lib, call Google OAuth2 apis, handle the response on Frontend, then call  corresponding APIs on Backend.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Google Login&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;enter login page, generate fake session to fetch sessionID
+    &lt;ol&gt;
+      &lt;li&gt;if google-state not in localstorage, automatically call Backend API to generate new session, Backend will return sessionID&lt;/li&gt;
+      &lt;li&gt;if google-state aleady in localstorage, do nothing.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;user login
+    &lt;ol&gt;
+      &lt;li&gt;if user choose normal login, the sessionID will be refreshed to a new one so that we can defense XSS attack, therefore after user logged in, Frontend will receive the updated sessionID and updated it in localstorage&lt;/li&gt;
+      &lt;li&gt;if user choose Google login,
+        &lt;ol&gt;
+          &lt;li&gt;frontend call OAuth2 API with scope(email profile openid), response_type(token) and open a new mini window&lt;/li&gt;
+          &lt;li&gt;Google will handle the OAuth2 flow and let user to authorize it&lt;/li&gt;
+          &lt;li&gt;once confirmed, Google will redirect the link to the callback address which is specified to callback url&lt;/li&gt;
+          &lt;li&gt;in this page, Frontend will check state param, if passed, call /loginWithGoogle again, and pass user’s data and state_token as well to Backend&lt;/li&gt;
+          &lt;li&gt;Backend will use bcrypt to compareSync the state_token and sessionID first, once passed, follow the previous logics for this API.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Gmail connect&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;frontend call OAuth2 API with scope(email profile https://mail.google.com/), response_type(code)  and open a new mini window&lt;/li&gt;
+  &lt;li&gt;Google will handle the OAuth2 flow and let user to authorize it&lt;/li&gt;
+  &lt;li&gt;once confirmed, Google will redirect the link to the callback address which is specified to callback url.&lt;/li&gt;
+  &lt;li&gt;in this page, Frontend will check state param, if passed, call backend connect gmail API , and pass code and state_token to Backend&lt;/li&gt;
+  &lt;li&gt;Backend will use bcrypt to compareSync the state_token and sessionID first, once passed, follow the previous logics for this API.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;aws-elb-issue&quot;&gt;AWS ELB issue&lt;/h2&gt;
+
+&lt;p&gt;Recently we use aws elb to add one layer between Frontend and Backend as proxy, in this way we can terminate SSL/TLS in front of the proxy, so that it will reduce network costs(encrypt) and boost response speed.&lt;/p&gt;
+
+&lt;p&gt;However the login flow doesn’t work in this network architecture, as we finally find, it’s caused by &lt;strong&gt;cookie&lt;/strong&gt; &lt;strong&gt;issue&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The new flow will be as below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thumbsnap.com/s/etVKhb6D.png?0303&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Frontend request HTTPS with nginx proxy&lt;/li&gt;
+  &lt;li&gt;nginx send HTTP request to Backend&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;cause Backend use express framework to handle HTTPS/HTTP request,  there are some configs for response cookie set, one option is secure , if this value set to true, compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.&lt;/p&gt;
+
+&lt;p&gt;and the express formal doc described:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you have your node.js behind a proxy and are using secure: true, you need to set “trust proxy” in express&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;so use app.set(‘trust proxy’, 1) make the flow works, Frontend can set csrf token into cookies, and the WebApp can pass session check.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why ‘trust proxy’ works&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;as it mentioned, express use ‘trust proxy’ to add X-Forwarded-Proto header, this header can make server trust the client and send response with cookies:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt; sends an HTTPS request to the &lt;strong&gt;Proxy&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Proxy&lt;/strong&gt; decrypts the HTTPS traffic and sets the “X-Forwarded-Proto: https”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Proxy&lt;/strong&gt; sends the HTTP request to the &lt;strong&gt;Server&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Server&lt;/strong&gt; sees that the URL is “http://”” but also sees that “X-Forwarded-Proto” is “https” and trusts that the request is HTTPS&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Server&lt;/strong&gt; sends back the requested web page or data&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
+        <link>http://pfan8.github.io/2021/03/03/Google-OAuth/</link>
+        <guid isPermaLink="true">http://pfan8.github.io/2021/03/03/Google-OAuth/</guid>
+        
+        <category>oauth</category>
+        
+        <category>node</category>
+        
+        <category>express</category>
+        
+        <category>cookie</category>
+        
+        
+      </item>
     
       <item>
         <title>Kruskal算法</title>
@@ -2746,105 +2887,6 @@ git cherry-pick f
         <guid isPermaLink="true">http://pfan8.github.io/2020/07/16/git-merge-&-rebase-&-cherry-pick/</guid>
         
         <category>git</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Github SSH配置</title>
-        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
-
-&lt;p&gt;用公司的Github账号时登录有2FC的存在，导致本地&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone&lt;/code&gt;时候总是登录失败无法clone代码下来，在manager的建议下，采用SSH的方式登录github，跳过2FC的步骤，也不用再设置账号密码&lt;/p&gt;
-
-&lt;h1 id=&quot;步骤&quot;&gt;步骤&lt;/h1&gt;
-
-&lt;p&gt;https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh&lt;/p&gt;
-
-&lt;p&gt;跟着Github官方文档的说明走就行，里面也讲得比较详细，这里用我的语言重复一遍，加之中文，让使用过的工程师能更快地回想这个过程&lt;/p&gt;
-
-&lt;p&gt;P.S. 下面针对Mac系统，其他系统看上面链接找相应命令&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;确认你是否存在已有的SSH key，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -al ~/.ssh&lt;/code&gt;，如果目录存在，查看目录下是否还有公钥的文件，如
-    &lt;ul&gt;
-      &lt;li&gt;id_rsa.pub&lt;/li&gt;
-      &lt;li&gt;id_ecdsa.pub&lt;/li&gt;
-      &lt;li&gt;id_ed25519.pub&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;如果你有这些文件，想用现成的，那么跳过2直接看3，不过既然你在看这篇文章，大概率是没有的，那么就要进入第2步——新建SSH key&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;输入下面指令生产SSH key&lt;/p&gt;
-
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;会提示你确认文件位置和密码（这个密码是对私钥文件的多一层保护）&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &amp;gt; Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
- &amp;gt; Enter passphrase (empty for no passphrase): [Type a passphrase]
- &amp;gt; Enter same passphrase again: [Type passphrase again]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;添加SSH key到ssh-agent，这样就不用每次都做公钥私钥匹配了，由ssh-agent统一管理，先查看ssh-agent的PID&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; `$ eval &quot;$(ssh-agent -s)&quot;`
- &amp;gt; Agent pid 59566`
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;检查config文件是否存在，如果不存在，则新建一个&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ open ~/.ssh/config
- &amp;gt; The file /Users/you/.ssh/config does not exist.
- $ touch ~/.ssh/config
- $ open ~/.ssh/config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;添加下面内容到文件：（最后一行是文件位置，如果有变更需要自行替换）&lt;/p&gt;
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Host *
-   AddKeysToAgent yes
-   UseKeychain yes
-   IdentityFile ~/.ssh/id_rsa
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;最后添加&lt;/p&gt;
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ ssh-add -K ~/.ssh/id_rsa
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;4.添加SSH key到你的github账号，可以通过命令&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pbcopy &amp;lt; ~/.ssh/id_rsa.pub&lt;/code&gt;快速得到拷贝，也可以自己手动去复制，然后在github账号上点击&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Settings -&amp;gt; SSH and GPG keys -&amp;gt; New SSH key or Add SSH key&lt;/code&gt;，在Key里面粘贴即可，图文教程查看&lt;a href=&quot;https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;5.测试并使用，在终端里输入&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh -T git@github.com
-# Attempts to ssh to GitHub
-
-可能有warning
-&amp;gt; The authenticity of host 'github.com (IP ADDRESS)' can't be established.
-&amp;gt; RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-&amp;gt; Are you sure you want to continue connecting (yes/no)? 
-或者
-&amp;gt; The authenticity of host 'github.com (IP ADDRESS)' can't be established.
-&amp;gt; RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-&amp;gt; Are you sure you want to continue connecting (yes/no)?
-
-输入yes
-&amp;gt; Hi username! You've successfully authenticated, but GitHub does not
-&amp;gt; provide shell access.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;clone的时候使用ssh的链接，在页面上点击&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Clone or download&lt;/code&gt;的时候注意选择，然后clone即可：&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git@github.com:xxx.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
-        <link>http://pfan8.github.io/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/</link>
-        <guid isPermaLink="true">http://pfan8.github.io/2020/06/21/github-SSH%E9%85%8D%E7%BD%AE/</guid>
-        
-        <category>github</category>
-        
-        <category>ssh</category>
-        
-        <category>安全</category>
         
         
       </item>
